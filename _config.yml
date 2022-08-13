@@ -23,10 +23,10 @@ timezone: Asia/Tokyo
 
 title: Karubits                          # the main title
 
-tagline: So I don't forget    # it will display as the sub-title
+tagline:   A collections of guides and notes related to Infrastructure, System Administration, Cloud Engineering and Devops.  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A collections of notes and guides for Infrastrucutre, Cloud and Devops.
+  A collections of guides and notes related to Infrastructure, System Administration, Cloud Engineering and Devops.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: ''
@@ -44,8 +44,8 @@ social:
   email: karubits@proton.me             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/username       # change to your github homepage
+    - https://twitter.com/carll      # change to your twitter homepage
+    - https://github.com/karubits       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
