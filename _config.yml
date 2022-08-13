@@ -21,7 +21,7 @@ timezone: Asia/Tokyo
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Karubits Docs                          # the main title
+title: Karubits                          # the main title
 
 tagline: So I don't forget    # it will display as the sub-title
 
