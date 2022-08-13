@@ -23,7 +23,7 @@ timezone: Asia/Tokyo
 
 title: Karubits                          # the main title
 
-tagline:  A collection of guides and notes focused on Infrastructure, System Administration, Cloud Engineering and Devops workflows.  # it will display as the sub-title
+tagline:  Welcome to カールビット, This site is a collection of guides and notes focused on Infrastructure, System Administration, Cloud Engineering and Devops workflows.  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   Karubits, A collection of guides and notes focused on Infrastructure, System Administration, Cloud Engineering and Devops workflows.
