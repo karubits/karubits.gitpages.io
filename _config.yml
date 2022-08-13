@@ -23,10 +23,10 @@ timezone: Asia/Tokyo
 
 title: Karubits                          # the main title
 
-tagline:   A collection of guides and notes related to Infrastructure, System Administration, Cloud Engineering and Devops.  # it will display as the sub-title
+tagline:  A collection of guides and notes focused on Infrastructure, System Administration, Cloud Engineering and Devops workflows.  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  Karubits, A collections of guides and notes related to Infrastructure, System Administration, Cloud Engineering and Devops.
+  Karubits, A collection of guides and notes focused on Infrastructure, System Administration, Cloud Engineering and Devops workflows.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: ''
