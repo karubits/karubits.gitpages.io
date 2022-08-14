@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Deploying a Unifi Network Controller and L3 Adoption"
+title: "Deploying a Unifi Network Controller"
 date: 2022-08-13 10:00:00 +0900
 categories: network
 tags: network unifi network controller ubiquiti ansible
@@ -11,8 +11,7 @@ tags: network unifi network controller ubiquiti ansible
 The Unifi Network Controller is a piece of software developed by Ubiquiti Inc, used for managing and administrating Unifi wireless access points, Unifi switches, and Unifi gateways.
 
 In the guide we will cover:
-- Install the Unifi Network Controller with Ansible on bare metal / VM.
-- Explaining L3 adoption
+- Installing the Unifi Network Controller with Ansible on bare metal / VM.
 
 Its worth pointing out there are a few other options for running the Network Controller with baremetal / VM is not for you.
 
@@ -46,7 +45,10 @@ To get up and running as quickly as possible we will use Ansible to take care of
 
 ### Fast track (Ansible)
 
-Check out my repositorty for an Ansible playbook that supports both Debian and Ubuntu to get and running with the Unifi Controller in minutes. The README.md should contain all the information you need to get started:
+Check out my repositorty for an Ansible playbook that supports both Debian and Ubuntu to get and running with the Unifi Controller in minutes. I did the hard work for you and better yet Ansible helps to document that work.
+
+The README.md should contain all the information you need to get started:
+
 [Github - Karubits - Ansible Unifi Network Controller](https://github.com/karubits/ansible-unifi-network-controller)
 
 ### Tradational Approach
@@ -54,6 +56,7 @@ Check out my repositorty for an Ansible playbook that supports both Debian and U
 Lets do this long way then. As the Cloudkey and other appliances also run Debian, this guide will also just focus on Debian over Ubuntu. There is some logic behind this decision which is also described in the github link above. 
 
 
+In a future article I will cover L3 (Layer 3) adoption, the benefits and how to approach adoption. Thank you for reading!
 
 
 
