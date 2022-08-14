@@ -32,7 +32,7 @@ The Unifi Network Controller has three main components
 
 To get up and running as quickly as possible we will use Ansible to take care of the majority of tasks and dependcies for us.
 
-> It should be noted at the current time of writting, the Unifi debian package will only accept MongoDB 3.x. However MongoDB has been end-of-life since April 2021. I honestly hope that Unifi can update their MongoDB support as without it, it can present security risks or more concering would bring into question their comment for hosting your own network controller. 
+> It should be noted at the current time of writting, the Unifi debian package will only accept MongoDB 3.x. However MongoDB 3.6 has been end-of-life since April 2021. I honestly hope that Unifi can update their MongoDB support as without it, it can present security risks or more concering would bring into question their commitment for hosting your own network controller and expect you to transition to their appliances. This is exactly what happened with the transisition from Unifi Video to Unifi Protect (an appliance only app).
 {: .prompt-warning }
 
 
@@ -46,8 +46,14 @@ To get up and running as quickly as possible we will use Ansible to take care of
 
 ### Fast track (Ansible)
 
-Check out my repositorty for an Ansible playbook that supports both Debian and Ubuntu to get and running with the Unifi Controller in minutes. 
-https://github.com/karubits/ansible-unifi-network-controller
+Check out my repositorty for an Ansible playbook that supports both Debian and Ubuntu to get and running with the Unifi Controller in minutes. The README.md should contain all the information you need to get started:
+[Github - Karubits - Ansible Unifi Network Controller](https://github.com/karubits/ansible-unifi-network-controller)
 
 ### Tradational Approach
+
+Lets do this long way then. As the Cloudkey and other appliances also run Debian, this guide will also just focus on Debian over Ubuntu. There is some logic behind this decision which is also described in the github link above. 
+
+
+
+
 
