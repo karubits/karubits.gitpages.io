@@ -2,11 +2,11 @@
 layout: post
 title: "Deploying a Unifi Network Controller"
 date: 2022-08-13 10:00:00 +0900
-categories: network
-tags: network unifi network controller ubiquiti ansible
+categories: [network, unifi]
+tags: [network, unifi, network, controller, ubiquiti, ansible]
 ---
 
-# Unifi Network Controller and L3 Adoption
+# Unifi Network Controller
 
 The Unifi Network Controller is a piece of software developed by Ubiquiti Inc, used for managing and administrating Unifi wireless access points, Unifi switches, and Unifi gateways.
 
@@ -32,7 +32,7 @@ The Unifi Network Controller has three main components
 To get up and running as quickly as possible we will use Ansible to take care of the majority of tasks and dependcies for us.
 
 > It should be noted at the current time of writting, the Unifi debian package will only accept MongoDB 3.x. However MongoDB 3.6 has been end-of-life since April 2021. I honestly hope that Unifi can update their MongoDB support as without it, it can present security risks or more concering would bring into question their commitment for hosting your own network controller and expect you to transition to their appliances. This is exactly what happened with the transisition from Unifi Video to Unifi Protect (an appliance only app).
-{: .prompt-warning }
+{: .prompt-info }
 
 
 ## Instalaltion Prerequisies
@@ -58,5 +58,5 @@ Lets do this long way then. As the Cloudkey and other appliances also run Debian
 
 In a future article I will cover L3 (Layer 3) adoption, the benefits and how to approach adoption. Thank you for reading!
 
-`TO BE CONTINUED`
 
+`TO BE CONTINUED`
