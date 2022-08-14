@@ -3,9 +3,8 @@ layout: post
 title: "Deploying a Unifi Network Controller and L3 Adoption"
 date: 2022-08-13 10:00:00 +0900
 categories: network
-tags: network unfi network controller ubiquiti ansible
+tags: network unifi network controller ubiquiti ansible
 ---
-# DRAFT / WIP
 
 # Unifi Network Controller and L3 Adoption
 
@@ -23,7 +22,7 @@ Some alternative options are:
 3. Cloud hosted Unifi Network Controller. The team over at Hostifi have dedicated managed cloud instances of the Unifi Network Controller. [Check them out here](https://www.hostifi.com/).
 
 
-## Installation
+# Installation
 
 The Unifi Network Controller has three main components
 
@@ -33,11 +32,22 @@ The Unifi Network Controller has three main components
 
 To get up and running as quickly as possible we will use Ansible to take care of the majority of tasks and dependcies for us.
 
+> It should be noted at the current time of writting, the Unifi debian package will only accept MongoDB 3.x. However MongoDB has been end-of-life since April 2021. I honestly hope that Unifi can update their MongoDB support as without it, it can present security risks or more concering would bring into question their comment for hosting your own network controller. 
+{: .prompt-warning }
 
-### Pre-requisies
+
+## Instalaltion Prerequisies
 
 1. A Debian/Ubuntu based installation. In this guide we will use Debian Bullseye.
 2. SSH access is configured and the server is reachable from the client you will run Ansible from.
 3. Ansible is installed on your PC. 
 
-### Getting Started
+## Getting Started
+
+### Fast track (Ansible)
+
+Check out my repositorty for an Ansible playbook that supports both Debian and Ubuntu to get and running with the Unifi Controller in minutes. 
+https://github.com/karubits/ansible-unifi-network-controller
+
+### Tradational Approach
+
