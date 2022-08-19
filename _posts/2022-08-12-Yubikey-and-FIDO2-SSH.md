@@ -1,9 +1,6 @@
-
-
-
 ---
 layout: post
-title: "SSH Access with Yubikey (FIDO)"
+title: "Yubikey and FIDO 2 with SSH"
 date: 2022-08-14 10:00:00 +0900
 categories: [linux, ssh]
 tags: [yubikey, linux, ssh, fido]
