@@ -4,6 +4,7 @@ title: "Linux Networking Notes"
 date: 2022-08-12 10:00:00 +0900
 categories: [linux, networking]
 tags: [networking, linux, lpic, notes]
+comments: true
 ---
 
 
@@ -34,10 +35,10 @@ A collection of rough notes for working with the networking stack in Linux
 
 ### 2.1. Non presistent routes 
 
-- Route via external gateway `ip route add {NETWORK/MASK} via {GATEWAYIP}`
-- Route via an interface `ip route add {NETWORK/MASK} dev {DEVICE}`
-- Default route via a interface `ip route add default {NETWORK/MASK} dev {DEVICE}`
-- Default route via a external gateway `ip route add default {NETWORK/MASK} via {GATEWAYIP}`
+- Route via external gateway: `ip route add {NETWORK/MASK} via {GATEWAYIP}`
+- Route via an interface: `ip route add {NETWORK/MASK} dev {DEVICE}`
+- Default route via a interface: `ip route add default {NETWORK/MASK} dev {DEVICE}`
+- Default route via a external gateway: `ip route add default {NETWORK/MASK} via {GATEWAYIP}`
 
 ### 2.2. Permement routes
 ```shell
