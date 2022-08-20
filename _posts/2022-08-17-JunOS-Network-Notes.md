@@ -31,6 +31,8 @@ set interfaces interface-range UNIFI_AP unit 0 family ethernet-switching vlan me
 set poe interface UNIFI_AP
 ```
 
+> Even when setting the native-vlad-id the vlan must also exist as a member of the trunk. 
+{: .prompt-tip }
 
 ## Configure LACP uplink
 ```
@@ -71,4 +73,8 @@ set vlans INBAND-MANAGEMENT l3-interface irb.1
 set routing-options static route 0.0.0.0/0 next-hop 10.8.251.1
 ```
 
-    
+Somtimes with the EX4300 the text can be cut off if your hostname is too long on the lcd screen and it can be hard to identify which switch is which. You can set a custom display messege on the LCD instead. 
+``` 
+ set chassis display fpc-slot 5 message BROKEN-SWITCH
+ ``` 
+ 
