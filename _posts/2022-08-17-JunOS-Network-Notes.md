@@ -4,6 +4,7 @@ title: "Juniper JunOS Networking Notes"
 date: 2022-08-14 10:00:00 +0900
 categories: [network, junos]
 tags: [network, junos, switches]
+comments: true
 ---
 
 
@@ -77,4 +78,3 @@ Somtimes with the EX4300 the text can be cut off if your hostname is too long on
 ``` 
  set chassis display fpc-slot 5 message BROKEN-SWITCH
  ``` 
- 

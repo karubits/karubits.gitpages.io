@@ -4,6 +4,7 @@ title: "Unifi Layer 3 Adoption"
 date: 2022-08-14 10:00:00 +0900
 categories: [network, unifi]
 tags: [network, unifi, network, controller, ubiquiti]
+comments: true
 ---
 
 # Adoption Methods
