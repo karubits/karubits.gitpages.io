@@ -206,7 +206,7 @@ LEAF-SW01#show mlag interfaces
 ### Enable 3rd party transceivers
 ```
 localhost login: admin
-localhost>ena
+localhost>enable
 localhost#bash
 
 Arista Networks EOS shell
