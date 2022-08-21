@@ -76,5 +76,5 @@ set routing-options static route 0.0.0.0/0 next-hop 10.8.251.1
 
 Somtimes with the EX4300 the text can be cut off if your hostname is too long on the lcd screen and it can be hard to identify which switch is which. You can set a custom display messege on the LCD instead. 
 ``` 
- set chassis display fpc-slot 5 message BROKEN-SWITCH
- ``` 
+set chassis display fpc-slot 5 message BROKEN-SWITCH
+``` 
