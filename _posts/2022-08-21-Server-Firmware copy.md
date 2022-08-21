@@ -289,10 +289,12 @@ sudo dpkg -i sst_1.2.198-0_amd64.deb
 
 ## Intel X710 FIrmware 
 
+Download the latest"Non-Volatile Memory (NVM) Update Utility for Intel® Ethernet Network Adapter 700 Series" pack. The link posted below will probably have expired as Intel has a habit of changing around the URLs. 
+
 ```shell
-wget https://downloadmirror.intel.com/25791/eng/700Series_NVMUpdatePackage_v8_30_Linux.tar.gz
-tar -xvf  700Series_NVMUpdatePackage_v8_30_Linux.tar.gz -C /tmp/
-rm 700Series_NVMUpdatePackage_v8_30_Linux.tar.gz
+wget https://downloadmirror.intel.com/739636/700Series_NVMUpdatePackage_v9_00.zip
+unzip 700Series_NVMUpdatePackage_v9_00.zip -C /tmp/
+rm 700Series_NVMUpdatePackage_v9_00.zip
  
 cd /tmp/700Series/Linux_x64
 ./nvmupdate64e
