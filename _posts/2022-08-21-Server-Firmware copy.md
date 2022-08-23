@@ -272,8 +272,10 @@ Restoring signature  - OK
 > At the time of writting, Intel's NAND SSD business has been acquired by Solidigm. 
 {: .prompt-tip }
 
-- Link to Download their firmware tools are here: https://www.intel.com/content/www/us/en/download/715595/solidigm-storage-tool-intel-branded-nand-ssds.html
-- User Guide: https://downloadmirror.intel.com/735799/SST-CLI-User-Guide-Public-727329-003US.pdf
+- Link to Download their firmware tools are here: 
+https://www.intel.com/content/www/us/en/download/715595/solidigm-storage-tool-intel-branded-nand-ssds.html
+- User Guide: 
+https://downloadmirror.intel.com/735799/SST-CLI-User-Guide-Public-727329-003US.pdf
 
 Download, extract and install the SST CLI Tool for Linux:
 ```shell
@@ -293,7 +295,7 @@ Download the latest"Non-Volatile Memory (NVM) Update Utility for Intel® Etherne
 
 ```shell
 wget https://downloadmirror.intel.com/739636/700Series_NVMUpdatePackage_v9_00.zip
-unzip 700Series_NVMUpdatePackage_v9_00.zip -C /tmp/
+unzip 700Series_NVMUpdatePackage_v9_00.zip -d /tmp/
 rm 700Series_NVMUpdatePackage_v9_00.zip
  
 cd /tmp/700Series/Linux_x64
