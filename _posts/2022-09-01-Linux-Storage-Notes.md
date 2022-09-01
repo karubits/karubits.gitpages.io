@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Linux Storage Notes"
-date: 2022-09-02 10:00:00 +0900
+date: 2022-09-01 10:00:00 +0900
 categories: [linux, storage]
 tags: [storage, ssd, hdd, disks, linux, lpic, notes]
 comments: true
