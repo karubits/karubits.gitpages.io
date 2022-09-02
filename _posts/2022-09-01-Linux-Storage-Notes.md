@@ -35,7 +35,7 @@ A collection of rough notes around managing storage in Linux
 
 
 > If you see the follow: \
-"Example Error - NVMe status: INVALID_FORMAT: The LBA Format specified is not supported. This may be due to various conditions(0x410a)" \
+NVMe status: INVALID_FORMAT: The LBA Format specified is not supported. This may be due to various conditions(0x410a) \
 Put the PC to sleep/suspend and wake it backup and rerun the command. 
 {: .prompt-tip }
 
