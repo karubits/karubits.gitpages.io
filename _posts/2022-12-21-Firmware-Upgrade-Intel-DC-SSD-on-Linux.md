@@ -30,13 +30,13 @@ This example will cover upgrade the Intel DC P4510 and the same steps will cover
 
 ### Procedure
 
-- Download the SST tool directly on the server (v1.4 link below). </br>
+- Download the SST tool directly on the server (v1.4 link below). <br>
     `wget https://sdmsdfwdriver.blob.core.windows.net/files/kba-gcc/drivers-downloads/ka-00085--sst/sst--1-4/sst-cli-linux-deb--1-4.zip`
-- Exact the package </br>
+- Exact the package <br>
     `unzip sst-cli-linux-deb--1-4.zip`
-- Install the SST CLI tool (Debian x64) </br>
+- Install the SST CLI tool (Debian x64) <br>
     `dpkg -i sst_1.4.221-0_amd64.deb`
-- View available SSDs and confirm which ones can be upgraded. </br>
+- View available SSDs and confirm which ones can be upgraded. <br>
     ```bash
     sst show -ssd
 
