@@ -267,28 +267,6 @@ Restoring signature  - OK
 ```
 
 
-## Intel Datacenter SSD Firmware
-
-> At the time of writting, Intel's NAND SSD business has been acquired by Solidigm. 
-{: .prompt-tip }
-
-- Link to Download their firmware tools are here: 
-https://www.intel.com/content/www/us/en/download/715595/solidigm-storage-tool-intel-branded-nand-ssds.html
-- User Guide: 
-https://downloadmirror.intel.com/735799/SST-CLI-User-Guide-Public-727329-003US.pdf
-
-Download, extract and install the SST CLI Tool for Linux:
-```shell
-unzip Intel_SSD_FUT_3.0.12.zip
-cd Intel_SSD_FUT_3.0.12
-sudo dpkg -i sst_1.2.198-0_amd64.deb
-```
-
-> THIS GUIDE NEEDS UPDARING AFTER THE AQUISTION
-
-
-
-
 ## Intel X710 FIrmware 
 
 Download the latest"Non-Volatile Memory (NVM) Update Utility for Intel® Ethernet Network Adapter 700 Series" pack. The link posted below will probably have expired as Intel has a habit of changing around the URLs. 
