@@ -46,16 +46,16 @@ Listed below are the official download links for Debian and Ubuntu release
 - Create the initial template with the minimum values. 
   ```shell
   qm create $VM_TEMPLATE_ID \
-      --name $TEMPLATE_NAME \
-      --core 2 \
-      --memory 2048 \
-      --net0 virtio,bridge=vmbr0 \
-      --ide2 $STORAGE:cloudinit \
-      --serial0 socket \
-      --vga serial0 \
-      --onboot 1 \
-      --agent 1,fstrim_cloned_disks=1 \
-      --tablet 0
+    --name $TEMPLATE_NAME \
+    --core 2 \
+    --memory 2048 \
+    --net0 virtio,bridge=vmbr0 \
+    --ide2 $STORAGE:cloudinit \
+    --serial0 socket \
+    --vga serial0 \
+    --onboot 1 \
+    --agent 1,fstrim_cloned_disks=1 \
+    --tablet 0
   ```
 - Import the downloaded disk image into the new VM template. 
   ```shell
@@ -66,20 +66,20 @@ Listed below are the official download links for Debian and Ubuntu release
 - Add the virtual disk controller and attached the imported disk to the template. 
   ```shell
   qm set $VM_TEMPLATE_ID \
-      --scsihw virtio-scsi-pci \
-      --scsi0 $STORAGE:vm-$VM_TEMPLATE_ID-disk-0,discard=on,ssd=1 \
-      --boot c \
-      --bootdisk scsi0
+    --scsihw virtio-scsi-pci \
+    --scsi0 $STORAGE:vm-$VM_TEMPLATE_ID-disk-0,discard=on,ssd=1 \
+    --boot c \
+    --bootdisk scsi0
   ```
 
 - Configure the default values for your cloud-init template. This can also be done on the Promxox UI:
   ```shell
   qm set $VM_TEMPLATE_ID \
-      --nameserver="10.7.7.3 10.7.7.2" \
-      --searchdomain=core.io \
-      --ipconfig0=ip=dhcp \
-      --ciuser=$VM_USER \
-      --cipassword=$VM_PASSWORD
+    --nameserver="10.7.7.3 10.7.7.2" \
+    --searchdomain=core.io \
+    --ipconfig0=ip=dhcp \
+    --ciuser=$VM_USER \
+    --cipassword=$VM_PASSWORD
   ```
 
 - Lastly, convert the VM into a template with the following command:<br>
@@ -89,17 +89,17 @@ Listed below are the official download links for Debian and Ubuntu release
 
 # Create a new VM from the template for testing
 
-- Before cloning the VM I use a varible to find the next available VM ID as the clone command requires you to set an ID. Then take a full a clone of the new template. 
+- Before cloning the VM I use a variable to find the next available VM ID as the clone command requires you to set an ID. Then take a full a clone of the new template. 
   ```shell
-  NEXT_VM_TEMPLATE_ID=$(pvesh get /cluster/nextid)
+  NEXT_VM=$(pvesh get /cluster/nextid)
 
-  qm clone $VM_TEMPLATE_ID $NEXT_VM_TEMPLATE_ID \
-      --full=true \
-      --name=wow-so-quick-to-deploy
+  qm clone $VM_TEMPLATE_ID $NEXT_VM \
+    --full=true \
+    --name=wow-so-quick-to-deploy
   ```
 - As the default image size is very small (247mb for Debian), expand the disk to make the VM useful and then start the VM:
   ```shell
-  qm resize $NEXT_VM_TEMPLATE_ID scsi0 +15G
-  qm start $NEXT_VM_TEMPLATE_ID
+  qm resize $NEXT_VM scsi0 +15G
+  qm start $NEXT_VM
   ```
 - Your new VM from your template should now be starting. with all your new setting set
