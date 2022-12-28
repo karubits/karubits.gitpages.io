@@ -6,26 +6,33 @@ categories: [proxmox]
 tags: [template, cloud-init, vm, linux]
 comments: true
 ---
+# Introduction and why 
 
-## Download cloud templates from Debian and Ubuntu
+TODO
 
-- The latest Debian cloud images for virtual machines can be downloaded with the following commands:
-```shell
-cd /tmp
+# Download cloud templates from Debian and Ubuntu
 
-# Debian 11 Bullseye
+Listed below are the official download links for Debian and Ubuntu release
+
+- Debian 11 Bullseye:<br>
 `wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2`
-
-# Confirm the checksum status
-
-```shell
-echo $(curl https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS | grep debian-11-genericcloud-amd64.qcow2 |  awk '{ print $1 }' ) debian-11-genericcloud-amd64.qcow2 | sha512sum --check 
-```
-- Ubuntu's official image can be downloaded with this URL:
+- Debian 11 Bullseye (Backports):<br>
+`wget https://cloud.debian.org/images/cloud/bullseye-backports/latest/debian-11-backports-generic-amd64.qcow2`
+- Debian 10 Buster:<br>
+`wget https://cloud.debian.org/images/cloud/buster/latest/debian-10-genericcloud-amd64.qcow2`
+- Ubuntu Server 20.04 LTS (Focal Fossa):<br>
 `wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img`
+- Ubuntu 18.04 LTS (Bionic Beaver):<br>
+`wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img`
 
+## Confirm the checksum status
 
-## Creating your first VM template with a cloud image. 
+- To confirm the checksum of an image with Debian below is an example. 
+    ```shell
+    echo $(curl https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS | grep     debian-11-genericcloud-amd64.qcow2 |  awk '{ print $1 }' ) debian-11-genericcloud-amd64.    qcow2 | sha512sum --check 
+    ```
+
+# Creating your first VM template with a cloud image. 
 
 - Setup the initial variables. 
     ```shell
@@ -77,7 +84,7 @@ echo $(curl https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS | g
 - Lastly, convert the VM into a template with the following command:<br>
     `qm template $VM_TEMPLATE_ID`
 
-## Create a new VM from the template for testing
+# Create a new VM from the template for testing
 
 - Before cloning the VM I use a varible to find the next available VM ID as the clone command requires you to set an ID. Then take a full a clone of the new template. 
     ```
