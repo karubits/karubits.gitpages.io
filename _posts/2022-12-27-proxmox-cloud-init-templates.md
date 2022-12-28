@@ -40,6 +40,7 @@ Listed below are the official download links for Debian and Ubuntu release
     VM_PASSWORD=supercrect  # < Clear text input
     VM_USER=karubits
     TEMPLATE_NAME=debian-cloud-template
+    CLOUD_IMAGE=focal-server-cloudimg-amd64.img
     STORAGE=nvme-2tb
     ```
 - Create the initial template with the minimum values. 
@@ -59,7 +60,7 @@ Listed below are the official download links for Debian and Ubuntu release
 - Import the downloaded disk image into the new VM template. 
     ```shell
     qm importdisk $VM_TEMPLATE_ID \
-        focal-server-cloudimg-amd64.img \
+        $CLOUD_IMAGE \
         $STORAGE
     ```
 - Add the virtual disk controller and attached the imported disk to the template. 
@@ -87,12 +88,12 @@ Listed below are the official download links for Debian and Ubuntu release
 # Create a new VM from the template for testing
 
 - Before cloning the VM I use a varible to find the next available VM ID as the clone command requires you to set an ID. Then take a full a clone of the new template. 
-    ```
+    ```shell
     NEXT_VM_TEMPLATE_ID=$(pvesh get /cluster/nextid)
 
     qm clone $VM_TEMPLATE_ID $NEXT_VM_TEMPLATE_ID \
         --full=true \
-        --name=fuckyeah3
+        --name=wow-so-quick-to-deploy
     ```
 - As the default image size is very small (247mb for Debian), expand the disk to make the VM useful and then start the VM:
     ```shell
