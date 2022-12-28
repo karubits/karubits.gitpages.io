@@ -55,7 +55,9 @@ Listed below are the official download links for Debian and Ubuntu release
     --vga serial0 \
     --onboot 1 \
     --agent 1,fstrim_cloned_disks=1 \
-    --tablet 0
+    --tablet 0 \
+    --ostype l26
+
   ```
 - Import the downloaded disk image into the new VM template. 
   ```shell
