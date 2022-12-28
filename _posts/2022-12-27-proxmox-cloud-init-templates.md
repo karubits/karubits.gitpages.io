@@ -29,7 +29,7 @@ Listed below are the official download links for Debian and Ubuntu release
 
 - To confirm the checksum of an image with Debian below is an example. 
   ```shell
-  echo $(curl https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS | grep       debian-11-genericcloud-amd64.qcow2 |  awk '{ print $1 }' )   debian-11-genericcloud-amd64.    qcow2 | sha512sum --check 
+  echo $(curl https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS | grep debian-11-genericcloud-amd64.qcow2 |  awk '{ print $1 }' ) debian-11-genericcloud-amd64.qcow2 | sha512sum --check
   ```
 
 # Creating your first VM template with a cloud image. 
