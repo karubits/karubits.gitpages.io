@@ -105,3 +105,14 @@ Listed below are the official download links for Debian and Ubuntu release
   qm start $NEXT_VM
   ```
 - Your new VM from your template should now be starting. with all your new setting set
+
+
+# Links
+- [Debian Official Cloud Images](https://cloud.debian.org/images/cloud/)
+- [Ubuntu Cloud Images](https://cloud-images.ubuntu.com/)
+- [Alpine Linux Cloud Images](https://alpinelinux.org/cloud/) <br> Note: Currently NoCloud is not supported but coming soon. 
+
+# References
+1. *[Proxmox Wiki - Cloud-Init Support](https://pve.proxmox.com/wiki/Cloud-Init_Support)*
+2. *[Proxmox VE - How to build an Ubuntu 22.04 Template (Updated Method) - Video](https://www.youtube.com/watch?v=MJgIm03Jxdo)*
+3. *[Proxmox VE – How to build an Ubuntu 22.04 Template (Updated Method) - Blog](https://www.learnlinux.tv/proxmox-ve-how-to-build-an-ubuntu-22-04-template-updated-method/)*
