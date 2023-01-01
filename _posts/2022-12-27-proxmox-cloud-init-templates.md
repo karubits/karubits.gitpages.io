@@ -10,20 +10,59 @@ comments: true
 
 TODO
 
-# Download cloud templates from Debian and Ubuntu
+# Download cloud templates of your preferred distributions
 
 Listed below are the official download links for Debian and Ubuntu release
 
-- Debian 11 Bullseye:<br>
-`wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2`
-- Debian 11 Bullseye (Backports):<br>
-`wget https://cloud.debian.org/images/cloud/bullseye-backports/latest/debian-11-backports-generic-amd64.qcow2`
-- Debian 10 Buster:<br>
-`wget https://cloud.debian.org/images/cloud/buster/latest/debian-10-genericcloud-amd64.qcow2`
-- Ubuntu Server 20.04 LTS (Focal Fossa):<br>
-`wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img`
-- Ubuntu 18.04 LTS (Bionic Beaver):<br>
-`wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img`
+| Distro | Release | Download | Checksum
+| :-- | :-- | :--: | :-- |
+| Debian | 11 Bullseye (Backports) | [💿](https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2) |
+| Debian | 11 Bullseye |  [💿](https://cloud.debian.org/images/cloud/bullseye/latest/)
+| Debian | 10 Buster |  [💿](https://cloud.debian.org/images/cloud/buster/latest/debian-10-genericcloud-amd64.qcow2) |
+| Ubuntu | 20.04 LTS Focal Fossa | [💿](https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img) | 
+| Ubuntu | 18.04 LTS Bionic Beaver | [💿](https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img)
+| Rocky | Linux 8 | [💿](https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base.latest.x86_64.qcow2)|
+| Rocky | Linux 9 | [💿](https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2)
+| Kali | 2022.4 | [💿](https://kali.download/cloud-images/current/kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz) | [🔑](https://kali.download/cloud-images/current/SHA256SUMS)
+
+<br>
+
+Or just download them all in one shot:
+
+```bash
+cd /tmp
+
+echo "Downloading Debian 11 Backports..."
+wget https://cloud.debian.org/images/cloud/bullseye-backports/latest/debian-11-backports-generic-amd64.qcow2
+
+echo "Downloading Debian 11..."
+wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2
+
+echo "Downloading Debian 10.."
+wget https://cloud.debian.org/images/cloud/buster/latest/debian-10-genericcloud-amd64.qcow2`
+
+echo "Downloading Ubuntu Focal..."
+wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
+
+echo "Downloading Ubuntu Bionic..."
+wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
+
+echo "Downloading Rocky 9..."
+wget https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2
+.
+echo "Downloading Rocky 8..."
+wget https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base.latest.x86_64.qcow2
+
+echo "Downloading Kali Linux..."
+wget https://kali.download/cloud-images/current/kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
+tar -xvf kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
+rm kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
+
+
+```
+
+
+
 
 ## Confirm the checksum status
 
