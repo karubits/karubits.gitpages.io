@@ -146,11 +146,6 @@ rm kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
 - Your new VM from your template should now be starting. with all your new setting set
 
 
-# Links
-- [Debian Official Cloud Images](https://cloud.debian.org/images/cloud/)
-- [Ubuntu Cloud Images](https://cloud-images.ubuntu.com/)
-- [Alpine Linux Cloud Images](https://alpinelinux.org/cloud/) <br> Note: Currently NoCloud is not supported but coming soon. 
-
 # References
 1. *[Proxmox Wiki - Cloud-Init Support](https://pve.proxmox.com/wiki/Cloud-Init_Support)*
 2. *[Proxmox VE - How to build an Ubuntu 22.04 Template (Updated Method) - Video](https://www.youtube.com/watch?v=MJgIm03Jxdo)*
