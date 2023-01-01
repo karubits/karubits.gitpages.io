@@ -24,6 +24,8 @@ Listed below are the official download links for Debian and Ubuntu release
 | Rocky | Linux 9 | [💿](https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2)| [🔑](https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM)
 | Rocky | Linux 8 | [💿](https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base.latest.x86_64.qcow2)| [🔑](https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM)
 | Kali | 2022.4 | [💿](https://kali.download/cloud-images/current/kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz) | [🔑](https://kali.download/cloud-images/current/SHA256SUMS)
+| Fedora | 37 | [💿](https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 ) | [🔑](https://ftp.riken.jp/Linux/fedora/releases/37/Cloud/x86_64/images/Fedora-Cloud-37-1.7-x86_64-CHECKSUM)
+
 
 <br>
 
