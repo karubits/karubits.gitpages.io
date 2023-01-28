@@ -67,7 +67,7 @@ _PFsense DHCP Option for Unifi L3 Adoption_
 
 ### Windows Server DHCP
 
-1. On the DHCP Server open a Powershell Terminal (As administration). 
+1. On the DHCP Server open a Powershell Terminal (As an administrator). 
    ```shell
    $UNIFI_CONTROLLER_IP = "172.16.1.4"
    $SCOPE = "192.168.4.0" 
