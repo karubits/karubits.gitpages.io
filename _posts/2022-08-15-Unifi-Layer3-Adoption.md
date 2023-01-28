@@ -68,28 +68,28 @@ subnet 192.168.50.0 netmask 255.255.255.0 {
 ### Windows Server DHCP
 
 1. On the DHCP Server open a Powershell Terminal (As administration). 
-```powershell
-$UNIFI_CONTROLLER_IP = "172.16.1.4"
-$SCOPE = "192.168.4.0" 
-
-# Create the vendor class
-Add-DhcpServerv4Class -Name Ubiquiti -data "ubnt" -Type "Vendor"
-
-# Create a new DHCP option under the vendor class 
-Add-DhcpServerv4OptionDefinition -Name "UniFi Controller" -OptionId 1 -Type "BinaryData" -VendorClass "Ubiquiti" -Description "Unifi Controller IP as Hex Object"
-
-# Convert the controller IP into command separated hex in the expected format.
-$ip = "$UNIFI_CONTROLLER_IP"
-$octets = $ip.Split(".")
-$hexOctets = @()
-foreach ($octet in $octets) {
-    $hexOctets += "0x{0:X2}" -f [int]$octet
-}
-$hexOctets -join ", "
-
-# Add the controller IP option to the targeted scope
-Get-DhcpServerv4Scope $SCOPE | Set-DhcpServerv4OptionValue -VendorClass 'Ubiquiti' -OptionId 001 -Value $hexOctets
-```
+   ```shell
+   $UNIFI_CONTROLLER_IP = "172.16.1.4"
+   $SCOPE = "192.168.4.0" 
+   
+   # Create the vendor class
+   Add-DhcpServerv4Class -Name Ubiquiti -data    "ubnt" -Type "Vendor"
+   
+   # Create a new DHCP option under the vendor    class 
+   Add-DhcpServerv4OptionDefinition -Name "UniFi    Controller" -OptionId 1 -Type "BinaryData"    -VendorClass "Ubiquiti" -Description "Unifi    Controller IP as Hex Object"
+   
+   # Convert the controller IP into command    separated hex in the expected format.
+   $ip = "$UNIFI_CONTROLLER_IP"
+   $octets = $ip.Split(".")
+   $hexOctets = @()
+   foreach ($octet in $octets) {
+       $hexOctets += "0x{0:X2}" -f [int]$octet
+   }
+   $hexOctets -join ", "
+   
+   # Add the controller IP option to the targeted    scope
+   Get-DhcpServerv4Scope $SCOPE |    Set-DhcpServerv4OptionValue -VendorClass    'Ubiquiti' -OptionId 001 -Value $hexOctets
+   ```
 
 
 
