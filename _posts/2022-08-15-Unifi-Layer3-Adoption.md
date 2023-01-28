@@ -73,12 +73,12 @@ _PFsense DHCP Option for Unifi L3 Adoption_
    $SCOPE = "192.168.4.0" 
    
    # Create the vendor class
-   Add-DhcpServerv4Class -Name Ubiquiti -data    "ubnt" -Type "Vendor"
+   Add-DhcpServerv4Class -Name Ubiquiti `-data "ubnt" -Type "Vendor"
    
-   # Create a new DHCP option under the vendor    class 
-   Add-DhcpServerv4OptionDefinition -Name "UniFi    Controller" -OptionId 1 -Type "BinaryData"    -VendorClass "Ubiquiti" -Description "Unifi Controller IP as Hex Object"
+   # Create a new DHCP option under the vendor class 
+   Add-DhcpServerv4OptionDefinition -Name "UniFi Controller" -OptionId 1 -Type "BinaryData" -VendorClass "Ubiquiti" -Description "Unifi Controller IP as Hex Object"
    
-   # Convert the controller IP into command    separated hex in the expected format.
+   # Convert the controller IP into command separated hex in the expected format.
    $ip = "$UNIFI_CONTROLLER_IP"
    $octets = $ip.Split(".")
    $hexOctets = @()
@@ -87,8 +87,8 @@ _PFsense DHCP Option for Unifi L3 Adoption_
    }
    $hexOctets -join ", "
    
-   # Add the controller IP option to the targeted    scope
-   Get-DhcpServerv4Scope $SCOPE |    Set-DhcpServerv4OptionValue -VendorClass    'Ubiquiti' -OptionId 001 -Value $hexOctets
+   # Add the controller IP option to the targeted scope
+   Get-DhcpServerv4Scope $SCOPE | Set-DhcpServerv4OptionValue -VendorClass 'Ubiquiti' -OptionId 001 -Value $hexOctets
    ```
 
 
