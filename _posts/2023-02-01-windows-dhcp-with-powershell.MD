@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Windows Server DHCP and PowerShell"
-date: 2022-12-27 10:00:00 +0900
+date: 2023-02-01 03:00:00 +0900
 categories: [windows server]
 tags: [dhcp, windows, powershell]
 comments: true
