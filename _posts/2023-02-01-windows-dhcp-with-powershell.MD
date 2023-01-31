@@ -9,9 +9,9 @@ comments: true
 
 I was recently tasked with setting Windows DHCP Server with powershell. Coming from isc-dhcp-server on Linux some basic options such as DNS Search Suffix (113) or setting up scopes in bulk can be tedious through the GUI, so this post details some common tasks that one might go through for setting up DHCP server from scratch in powershell. 
 
-## Common DHCP Options
+# Common DHCP Options
 
-### DNS Search List
+## DNS Search List
 
 As the DHCP option expects an HEX array we need to convert the search list into a HEX array. 
 1. Create the DHCP Option
@@ -49,7 +49,7 @@ As the DHCP option expects an HEX array we need to convert the search list into 
    ```
 
 
-### TimeZone Options 
+## TimeZone Options 
 A common use case for setting the timezone options in DHCP can be for VOIP phones and getting the time to be displayed correctly.  There are two DHCP options that can be created and set. Option ID 100 and 101. 
 
 To read more about the specifics of the option I recommend reader the following [link](https://www.lorier.net/docs/dhcp-timezone.html).
@@ -65,7 +65,7 @@ To read more about the specifics of the option I recommend reader the following 
    Set-DhcpServerv4OptionValue  -OptionId 100    -Value "JST-9"
    ```
 
-### Unifi Network Controller (L3 Adoption)
+## Unifi Network Controller (L3 Adoption)
 If you have a Unifi Network Controller you can create a vendor specific option and define the IP address of the network controller for automatic discovery of Unifi devices. 
 
 1. First create the vendor class for Ubiquiti
@@ -97,10 +97,7 @@ If you have a Unifi Network Controller you can create a vendor specific option a
    Set-DhcpServerv4OptionValue -VendorClass 'Ubiquiti' -OptionId 001 -Value $hexOctets -ScopeId $SCOPE
    ```
 
-
-
-
-## Example of creating DHCP scopes in Bulk
+# Example of creating DHCP scopes in Bulk
 
 - To create DHCP scopes in bulk one approach is to define the scopes and options in a CSV file. Then use a powershell script to import the CSV and loop through each row. 
 - Here is an example of a CSV. 
@@ -168,7 +165,7 @@ If you have a Unifi Network Controller you can create a vendor specific option a
    }
    ```
 
-## Migrating DHCP reservations from pfsense
+# Migrating DHCP reservations from pfsense
 
 - This python script will read the config.xml of a pfsense configuration and create a CSV file containg the MAC Address, IP Address, and description. 
    ```python
