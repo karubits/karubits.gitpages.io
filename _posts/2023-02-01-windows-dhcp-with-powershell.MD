@@ -6,9 +6,8 @@ categories: [windows server]
 tags: [dhcp, windows, powershell]
 comments: true
 ---
-# Windows Server DHCP and PowerShell
 
-I was recently tasked with setting Windows DHCP Server with powershell. Coming from isc-dhcp-server on Linux some basic options such as DNS Search Suffix (113) or setting up scopes in bulk can be tedious through the GUI, so this post details some common tasks that one might go through for setting up DHCP server from scratch. 
+I was recently tasked with setting Windows DHCP Server with powershell. Coming from isc-dhcp-server on Linux some basic options such as DNS Search Suffix (113) or setting up scopes in bulk can be tedious through the GUI, so this post details some common tasks that one might go through for setting up DHCP server from scratch in powershell. 
 
 ## Common DHCP Options
 
@@ -53,19 +52,16 @@ As the DHCP option expects an HEX array we need to convert the search list into 
 ### TimeZone Options 
 A common use case for setting the timezone options in DHCP can be for VOIP phones and getting the time to be displayed correctly.  There are two DHCP options that can be created and set. Option ID 100 and 101. 
 
-To read more about the specifics of the option I recommend reader the following link:
-- https://www.lorier.net/docs/dhcp-timezone.html
+To read more about the specifics of the option I recommend reader the following [link](https://www.lorier.net/docs/dhcp-timezone.html).
 
 1. Create the DHCP options for 100 and 101. In this example the timezone is specified for Japan. 
    ```powershell
    Add-DhcpServerv4OptionDefinition -Name PCode    -Description "TZ-POSIX String" -OptionId 100    -Type "String" # JST-9
-   
    Add-DhcpServerv4OptionDefinition -Name TCode    -Description "TZ-Database String" -OptionId 101    -Type "String"
    ```
 2. You can set the default value globally instead of the scope level if your DHCP server resides in a single TZ. 
    ```powershell
    Set-DhcpServerv4OptionValue  -OptionId 101    -Value "Asia/Tokyo"
-   
    Set-DhcpServerv4OptionValue  -OptionId 100    -Value "JST-9"
    ```
 
@@ -106,8 +102,8 @@ If you have a Unifi Network Controller you can create a vendor specific option a
 
 ## Example of creating DHCP scopes in Bulk
 
-- To create DHCP scopes in bulk one approach is to define the scopes and options into a CSV. Then use a powershell script to import the CSV and loop through each row. 
-- Here is an example of the CSV
+- To create DHCP scopes in bulk one approach is to define the scopes and options in a CSV file. Then use a powershell script to import the CSV and loop through each row. 
+- Here is an example of a CSV. 
    ```
    Name,Description,ScopeID,StartRange,EndRange,LeaseDuration,SubnetMask,Router,DnsDomain,DNSServer,NTPServers,DNSDomainSearch
    102_EMPLOYEES,Tokyo Employees - VLAN: 102  (172.16.150.0/24),172.16.150.0,172.16.150.100,172.16.150.220,18.00:00:00,255.255.255.0,172.16.150.1,employees.karubits.com,"1.1.1.1,1.0.0.1,8.8.8.8","192.168.88.1,10.2.25.3,10.2.25.10,10.2.25.11,192.168.88.14","employees.karubits.com,global.karubits.com,karubits.local"
