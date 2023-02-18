@@ -7,9 +7,6 @@ tags: [storage, ssd, hdd, disks, linux, lpic, notes]
 comments: true
 ---
 
-
-# Linux Storage Notes
-
 A collection of rough notes around managing storage in Linux
 
 
