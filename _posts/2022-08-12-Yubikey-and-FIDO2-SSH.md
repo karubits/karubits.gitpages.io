@@ -40,6 +40,22 @@ ssh-keygen -t ed25519-sk -O resident \
     -C "Emergency Key 2 - 10653212"
 ````
 
-ref. https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html
+Factors      	       	                         | Description                                                                                      | Command
+------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------
+No PIN or touch are required                     | You will not be required to enter your FIDO2 PIN or touch your YubiKey each time to authenticate | `ssh-keygen -t ed25519-sk -O resident -O no-touch-required`
+PIN but no touch required                        | Entering the PIN will be required but touching the physical key will not                         | `ssh-keygen -t ed25519-sk -O resident -O verify-required -O no-touch-required`
+No PIN but touch is required                     | You will only need to touch the YubiKey to authenticate                                          | `ssh-keygen -t ed25519-sk -O resident`
+A PIN and a touch are required (**most secure**) | This is the most secure option, it requires both the PIN and touching to be used                 | `ssh-keygen -t ed25519-sk -O resident -O verify-required`
 
 
+ref. 
+- [Securing SSH with FIDO2](https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html)
+- [GitHub now supports SSH security keys](https://www.yubico.com/blog/github-now-supports-ssh-security-keys/)
+
+
+Using a Discoveral (resident) key has several benefits:
+
+1. Portability: Since the private key is stored on the YubiKey, you can use it on multiple devices without having to copy or transfer the key between them. Just plug in the YubiKey, and you can use the resident key for authentication.
+2. Enhanced security: Resident keys are protected by the hardware security of the YubiKey. This makes it more difficult for an attacker to access or compromise the private key compared to when it is stored on a computer's filesystem.
+
+However for the best security a non-discoverable credential is preferred. If the key was found they would not be able to use it for ssh access.
