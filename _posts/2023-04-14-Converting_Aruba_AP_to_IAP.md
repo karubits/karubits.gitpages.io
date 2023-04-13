@@ -117,7 +117,7 @@ When you have done using tftp-hpa its good practice to close the open holes and 
 > If you don't see any console output on your PC then you might need to reverse the TX and TX connectors which I had to do in my case with this particular USB adaptor.
 {: .prompt-info }
 
-> If your keyboard input is not working trying make sure the HW and HW Flow Control is disabled with minicom.
+> If your keyboard input is not working make sure the HW and SW Flow Control is disabled with minicom.
 {: .prompt-info }
 
 ## Part 2 - Reflashing to Aruba Instant Access Point (IAP)
@@ -150,7 +150,7 @@ When you have done using tftp-hpa its good practice to close the open holes and 
    apboot> 
    apboot> 
    ```
-3. We first need to get the serial number of the AP. A quick easy way is to simply type in mfginfo to display the hardware information of the device. 
+3. You will need to get the serial number of the AP. A quick easy way is to simply type in `mfginfo` to display the hardware information of the device.
    ```bash
    apboot> mfginfo
    Inventory:
@@ -168,14 +168,14 @@ When you have done using tftp-hpa its good practice to close the open holes and 
    Card 2: Antenna
            Minor Rev/Variant   : 01
    ```
-4. Back on your Linux make (make sure you have openssl installed) use the serial number to generate a SHA1 hash with the region of your AP e.g. US (USA), RW (Rest of the World) and the serial number. In this example our AP is in the US region and the serial number is CNF3J0TXBY. It is also possible to change the region using this step as well.
+4. Back on your Linux make (make sure you have openssl installed) use the serial number to generate a SHA1 hash with the region of your AP e.g. US (USA), RW (Rest of the World) and the serial number. In this example our AP is in the US region and the serial number is CNF3J0TXBY. It is also possible to change the region using this step as well (I personally have not validated this though).
    ```bash
    echo -n "US-CNF3J0TXBY" | openssl sha1
    SHA1(stdin)= 8f75c7d6e48fa2d974c23a6107bbff1997149c17
    ```
 5. Using the has generated sha1 has use the following command on the AP to set the region.
    ```
-   proginv system ccode CCODE-US-b663dd2ec2785bda88e25fd8cdb8e20c629410b6
+   proginv system ccode CCODE-US-8f75c7d6e48fa2d974c23a6107bbff1997149c17
    ```
 6. Then type in `invent -w` to convert AP to IAP.
    ```
@@ -211,7 +211,7 @@ When you have done using tftp-hpa its good practice to close the open holes and 
    reset
    ```
 
-> After the device has rebooted, if you want to use the console login the username is `admin` and the password is the devices serial number e.g. `CNF3J0TXBY`. If you need to know the DHCP assigned IP of the AP after logging in you can type in `show ip interface brief`
+> After the device has rebooted, if you want to use the console login the username is `admin` and the password is the devices serial number e.g. `CNF3J0TXBY`. If you need to know the DHCP assigned IP of the access point after logging in you can type in `show ip interface brief`
 {: .prompt-info }
 
 > When logging in for the first time if you see this error `Internal error 8-0, please contact support` it just means the device is still initializing. Try again in a few minutes. 
