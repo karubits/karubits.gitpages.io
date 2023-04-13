@@ -84,18 +84,21 @@ When you have done using tftp-hpa its good practice to close the open holes and 
 
 ## Part 1 - Connecting the console cable
 
-1. Firstly you will need a serial adpator for connecting to Aruba access ports. As the serial connection is not a standard RJ45 connector like with other network devices I would recommend purchasing a breakout serial adaptor much like the one pictured below. </br>
+1. Firstly you will need a serial adpator for connecting to Aruba access ports. As the serial connection is not a standard RJ45 connector like with other network devices I would recommend purchasing a breakout serial adaptor much like the one pictured below.
+
    ![DSD TECH SH-U09BL w/ CP2102N Chip](/img/usb-serial-console.png){: .shadow }
    _DSD TECH SH-U09BL w/ CP2102N Chip_
 
-2. The console port is located under a rubber plug on the 300 series from Aruba. Lift up the rubber plug to expose the 4 pin connector. </br>
-   ![Console Port](../img/aruba-310-rear.png){: .shadow }
+2. The console port is located under a rubber plug on the 300 series from Aruba. Lift up the rubber plug to expose the 4 pin connector. 
+
+   ![Console Port](/img/aruba-310-rear.png){: .shadow }
    _Console Port Location_
 
-3. Connect the TX, RX,and Ground (GND) pins only. </br>
-   ![Console PIN Out](../img/aruba-310-console-pinout.png){: .shadow }
+3. Connect the TX, RX,and Ground (GND) pins only.
+
+   ![Console PIN Out](/img/aruba-310-console-pinout.png){: .shadow }
    _Console Port Pin Out_
-4. On your PC you will need minicom installed. 
+4. On your PC you will need minicom installed.
    ```bash
    sudo apt install -y minicom
    ```
