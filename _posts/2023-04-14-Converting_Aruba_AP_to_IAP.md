@@ -216,3 +216,7 @@ When you have done using tftp-hpa its good practice to close the open holes and 
 
 > When logging in for the first time if you see this error `Internal error 8-0, please contact support` it just means the device is still initializing. Try again in a few minutes. 
 {: .prompt-info }
+
+
+## References
+1. *[Server the Home Forum - Aruba AP to IAP](https://forums.servethehome.com/index.php?threads/aruba-ap-to-iap.29426/post-280609)*
