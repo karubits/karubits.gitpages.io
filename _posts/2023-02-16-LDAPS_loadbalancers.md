@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Load Balancing LDAPs for Active Directory"
-date: 2023-02-18 03:00:00 +0900
+date: 2025-02-18 03:00:00 +0900
 categories: [linux, server]
 tags: [ad, ldaps, linux, haproxy]
 comments: true
