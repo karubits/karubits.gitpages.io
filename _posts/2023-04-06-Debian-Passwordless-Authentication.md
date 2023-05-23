@@ -4,7 +4,6 @@ title: "Setup Debian/Ubuntu (Gnome) with Passwordless Logins (U2F and Fingerprin
 date: 2023-04-8 03:00:00 +0900
 categories: [linux, server]
 tags: [yubikey, linux, debian, u2f, fingerprint, passwordless]
-comments: true
 ---
 
 Setup Debian/Ubuntu (Gnome) with Passwordless Logins (U2F and Fingerprint)

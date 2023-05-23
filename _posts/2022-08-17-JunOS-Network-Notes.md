@@ -4,7 +4,6 @@ title: "Juniper JunOS Networking Notes"
 date: 2022-08-14 10:00:00 +0900
 categories: [network, junos]
 tags: [network, junos, switches]
-comments: true
 ---
 
 

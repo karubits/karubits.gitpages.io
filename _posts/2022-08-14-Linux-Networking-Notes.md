@@ -4,7 +4,6 @@ title: "Linux Networking Notes"
 date: 2022-08-12 10:00:00 +0900
 categories: [linux, networking]
 tags: [networking, linux, lpic, notes]
-comments: true
 ---
 
 

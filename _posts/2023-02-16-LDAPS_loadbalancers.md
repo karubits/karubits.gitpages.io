@@ -4,7 +4,6 @@ title: "Load Balancing LDAPs for Active Directory"
 date: 2025-02-18 03:00:00 +0900
 categories: [linux, server]
 tags: [ad, ldaps, linux, haproxy]
-comments: true
 ---
 
 Typically in organizations that have an active directory or OpenLDAP infrastructure will most likely have internal and external services connecting to the directory using the LDAP protocol and typically used for authenticating users or looking up user information from a central directory. 

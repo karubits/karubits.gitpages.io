@@ -4,7 +4,6 @@ title: "Proxmox cloud-init templates"
 date: 2022-12-27 10:00:00 +0900
 categories: [proxmox]
 tags: [template, cloud-init, vm, linux]
-comments: true
 ---
 # Introduction and why 
 
