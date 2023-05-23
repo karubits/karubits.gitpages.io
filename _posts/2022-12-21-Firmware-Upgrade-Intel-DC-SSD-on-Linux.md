@@ -4,7 +4,6 @@ title: "Firmware upgrade Intel DC SSD on Linux"
 date: 2022-12-21 10:00:00 +0900
 categories: [server]
 tags: [server. dell, intel, proxmox, firmware]
-comments: true
 ---
 
 

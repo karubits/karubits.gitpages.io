@@ -4,7 +4,6 @@ title: "Deploying a Unifi Network Controller"
 date: 2022-08-13 10:00:00 +0900
 categories: [network, unifi]
 tags: [network, unifi, network, controller, ubiquiti, ansible]
-comments: true
 ---
 
 # Unifi Network Controller

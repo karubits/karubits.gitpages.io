@@ -4,7 +4,6 @@ title: "Converting an Aruba AP to an Instant Access Point (Without a Mobility Co
 date: 2023-04-13 01:00:00 +0900
 categories: [network, wifi]
 tags: [network, wap, access point, aruba, iap]
-comments: true
 ---
 
 ## Prerequisites

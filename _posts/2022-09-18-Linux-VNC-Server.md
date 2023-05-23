@@ -4,7 +4,6 @@ title: "Linux VNC Server"
 date: 2022-09-17 10:00:00 +0900
 categories: [linux]
 tags: [linux, vnc]
-comments: true
 ---
 
 

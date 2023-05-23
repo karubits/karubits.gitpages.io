@@ -4,7 +4,6 @@ title: "Server Firmware Notes"
 date: 2022-08-21 10:00:00 +0900
 categories: [server]
 tags: [server. dell, mellanox, firmware]
-comments: true
 ---
 
 # Server Preperation / Hardware Notes
