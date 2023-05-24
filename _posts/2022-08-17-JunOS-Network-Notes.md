@@ -65,7 +65,7 @@ Assumption is a http server is available to serve the firmware images.
    file delete-directory /var/tmp/.schema-cache recurse
    request system storage cleanup all-members | no-more
     
-   #  switches in a virtual chassis (All EX4300 except for 1st floor)
+   #  switches in a virtual chassis
    file delete-directory fpc0:/var/tmp/.schema-cache recurse
    file delete-directory fpc1:/var/tmp/.schema-cache recurse
    file delete-directory fpc2:/var/tmp/.schema-cache recurse
