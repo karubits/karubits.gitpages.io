@@ -35,23 +35,67 @@ set poe interface UNIFI_AP
 {: .prompt-tip }
 
 ## Configure LACP uplink
-```
-set interfaces ae1 description "Uplink to Server SRV001"
-set interfaces ae1 aggregated-ether-options lacp active
-set interfaces ae1 aggregated-ether-options lacp periodic fast
-set interfaces ae1 unit 0 family ethernet-switching interface-mode access
-set interfaces ae1 unit 0 family ethernet-switching vlan members MANAGEMENT
 
-set interfaces interface-range SRV001 member ge-0/0/0
-set interfaces interface-range SRV001 member ge-1/0/0
-set interfaces interface-range SRV001 ether-options 802.3ad ae1
-```
+1. Example below
+   ```
+   set interfaces ae1 description "Uplink to Server SRV001"
+   set interfaces ae1 aggregated-ether-options lacp active
+   set interfaces ae1 aggregated-ether-options lacp periodic fast
+   set interfaces ae1 unit 0 family ethernet-switching interface-mode access
+   set interfaces ae1 unit 0 family ethernet-switching vlan members MANAGEMENT
+   
+   set interfaces interface-range SRV001 member ge-0/0/0
+   set interfaces interface-range SRV001 member ge-1/0/0
+   set interfaces interface-range SRV001 ether-options 802.3ad ae1
+   ```
 
 
-Don't forget to bumb the agregate count for each aggregate created
-```
-set chassis aggregated-devices ethernet device-count 32
-```
+2. Don't forget to bump the aggregate count for each aggregate created
+   ```
+   set chassis aggregated-devices ethernet device-count 32
+   ```
+
+## Upgrading firmware
+
+Assumption is a http server is available to serve the firmware images. 
+
+1. On some occasions space has to be made before upgrading the firmware. 
+   ```
+   # Single Switch (e.g. EX3300s)
+   file delete-directory /var/tmp/.schema-cache recurse
+   request system storage cleanup all-members | no-more
+    
+   #  switches in a virtual chassis (All EX4300 except for 1st floor)
+   file delete-directory fpc0:/var/tmp/.schema-cache recurse
+   file delete-directory fpc1:/var/tmp/.schema-cache recurse
+   file delete-directory fpc2:/var/tmp/.schema-cache recurse
+   file delete-directory fpc3:/var/tmp/.schema-cache recurse
+   file delete-directory fpc4:/var/tmp/.schema-cache recurse
+   file delete-directory fpc5:/var/tmp/.schema-cache recurse
+   file delete-directory fpc6:/var/tmp/.schema-cache recurse
+   request system storage cleanup all-members no-confirm | no-more
+   ```
+
+2. Upgrade the firmware
+   ```
+   request system software add http://[ IP ADRDRESS ]:[PORT]/[PATH]
+   e.g.
+   request system software add http://10.21.24.50:8000/junos/ex4300/jinstall-ex-4300-21.4R3-S3.4-signed.tgz
+   ```
+3. Reboot the switch
+   ```
+   # Instant reboot
+   request system reboot message "Rebooting to upgrade to 15.1R7-S13" 
+   
+   # Instant reboot for virtual chassis
+   request system reboot all-members message "Rebooting to upgrade to 21.4R3-S3.4"
+   
+   # Scheduled reboot 
+   request system reboot at "2023-05-05 23:00:00" message "Rebooting to upgrade to 15.1R7-S13" 
+   
+   # Scheduled reboot for virtual chassis
+   request system reboot at "2023-05-05 23:00:00" all-members message "Rebooting to upgrade to 21.4R3-S3.4"
+   ```
 
 
 # Other Notes
