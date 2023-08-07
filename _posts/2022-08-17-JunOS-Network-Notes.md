@@ -97,6 +97,42 @@ Assumption is a http server is available to serve the firmware images.
    request system reboot at "2023-05-05 23:00:00" all-members message "Rebooting to upgrade to 21.4R3-S3.4"
    ```
 
+## Upgrading firmware from USB
+
+1. Log into the switch and drop out of the cli to the shell, then mount the USB device and copy the junos image over to a local tmp folder. 
+   ```bash
+   start shell
+   mount_msdosfs /dev/da1s1 /mnt
+   cp /mnt/jinstall-ex-3300-15.1R7-S13-domestic-signed.tgz /var/tmp/
+   cli
+   ```
+2. Upgrade 
+   ```
+   request system software add /var/tmp/jinstall-ex-3300-15.1R7-S13-domestic-signed.tgz 
+   ```
+
+
+> If you see the error "certificate is not yet valid: /C=US/ST=CA/L=Sunnyvale/O=J...." manually set the date by using `set date 202307101811.12`
+{: .prompt-tip }
+
+## Factory Wipe and install new firmware from USB
+
+- To perform this recovery installation, the USB device should be formatted to FAT-32 and should be empty (recommended USB size: 1GB, 2GB, or 4GB). Review the complete USB compatibility specifications listed in USB Port Specifications for an EX Series Switch.
+- Copy the Junos OS package to the USB device.
+- Power off the EX switch.
+- Plug the USB device into the EX switch.
+- Power on the EX switch.
+- When you see the `Hit [Enter] to boot immediately, or space bar for command prompt` message prompt appear, press the Space bar to get the loader prompt.
+> To avoid missing it, you may start pressing the Space bar some seconds before the message prompt appears.
+{: .prompt-tip }
+- Issue the `install` command with the `format` option:
+```bash
+loader> install --format file:///<Junos package name>
+# For example:
+loader> install --format file:///jinstall-ex-4200-15.1R7-S6.3-domestic-signed.tg
+```
+> Note the above does require 3x forward slashes after file:, `///`
+{: .prompt-tip }
 
 # Other Notes
 
