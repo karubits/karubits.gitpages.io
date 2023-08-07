@@ -131,7 +131,7 @@ done
    ```
 
 
-> Its generally not good practice to install packages on your hypervisors unless absolutely necessary. Downloads, checksum checking, and installing extra packages can be done on a seperate PC and the final disk image uplaoded to the hypervisor using SCP. 
+> Its generally not good practice to install packages on your hypervisors unless absolutely necessary. Downloads, checksum checking, and installing extra packages can be done on a separate PC and the final disk image can then be transferred to the hypervisor using SCP. 
 {: .prompt-warning }
 
 - On proxmox start by settings variables to make the steps more generic and repeatable.  
