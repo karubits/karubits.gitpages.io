@@ -5,13 +5,31 @@ date: 2022-12-27 10:00:00 +0900
 categories: [proxmox]
 tags: [template, cloud-init, vm, linux]
 ---
-# Introduction and why 
+# Introduction and why
 
-TODO
+Using cloud images provided by the major distribution creators over traditional installation media offers several advantages in the context of cloud computing and virtualization environments. Here are some of the key benefits:
+
+- Optimized for Cloud Environments: Cloud images are specifically designed and optimized for running in virtualized or cloud environments. They come with preconfigured settings, drivers, and components tailored to these environments, ensuring smooth performance and compatibility.
+- Smaller Footprint: Cloud images are usually stripped down to include only essential packages, reducing the overall size of the image. This is important for faster deployment, as well as reducing storage costs in cloud environments.
+- Faster Deployment: Cloud images are ready to use out of the box, so you can quickly deploy instances without the need for a full installation process. This reduces setup time and makes it easier to scale your infrastructure.
+- Automated Configuration: Cloud images often include tools and scripts for automated configuration and deployment. This can streamline the process of setting up networking, security settings, and other parameters.
+- Regular Updates: Cloud images are regularly updated to include the latest security patches and software updates. This helps ensure that your instances are running the most up-to-date and secure software.
+- Integration with Cloud Services: Cloud images often come with cloud-init, a tool that enables you to customize and configure instances during the first boot. This allows for seamless integration with cloud platforms' services and APIs.
+- Image Reusability: Once you've configured and customized a cloud image, you can save it as a custom image or snapshot. This allows you to create new instances from the customized image, saving you time and ensuring consistency across deployments.
+- Version Consistency: Using cloud images helps maintain consistency across different instances. This is especially important when managing a large number of virtual machines, as manual installations might introduce inconsistencies.
+- Rapid Scaling: Cloud images make it easier to scale your infrastructure up or down based on demand. You can quickly launch new instances without going through a time-consuming installation process.
+- Resource Efficiency: Cloud images are optimized to run efficiently in virtualized environments, making better use of resources like CPU, memory, and storage.
+
+
+## clout-init
+
+cloud-init is a versatile package used in cloud computing environments to streamline the setup and configuration of virtual machine instances. It gathers instance-specific information from metadata services and user-provided data during instance launch. Using a modular architecture and YAML-based configuration, cloud-init automates tasks such as network setup, user account creation, and software installation. It allows users to define custom actions and settings through user data, ensuring efficient, consistent, and customizable initialization of instances while promoting compatibility across different Linux distributions and cloud platforms.
+
+With Proxmox cloud-init is used to automatically setup IP addressing, name servers, ssh keys, and the initial password. 
 
 # Download cloud templates of your preferred distributions
 
-Listed below are the official download links for Debian and Ubuntu release
+Listed below are the official download links for some of the more common cloud images. 
 
 | Distro | Release | Download | Checksum
 | :-- | :-- | :--: | :-- |
