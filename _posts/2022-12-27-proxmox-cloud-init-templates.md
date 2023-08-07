@@ -15,6 +15,7 @@ Listed below are the official download links for Debian and Ubuntu release
 
 | Distro | Release | Download | Checksum
 | :-- | :-- | :--: | :-- |
+| Debain | 12 Bookworm | [💿](https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2) | [🔑](https://cloud.debian.org/images/cloud/bookworm/latest/SHA512SUMS)
 | Debian | 11 Bullseye (Backports) | [💿](https://cloud.debian.org/images/cloud/bullseye-backports/latest/debian-11-backports-genericcloud-amd64.qcow2) | [🔑](https://cloud.debian.org/images/cloud/bullseye-backports/latest/SHA512SUMS)
 | Debian | 11 Bullseye |  [💿](https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2) | [🔑](https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS)
 | Debian | 10 Buster |  [💿](https://cloud.debian.org/images/cloud/buster/latest/debian-10-genericcloud-amd64.qcow2) | [🔑](https://cloud.debian.org/images/cloud/buster/latest/SHA512SUMS)
@@ -25,58 +26,97 @@ Listed below are the official download links for Debian and Ubuntu release
 | Alama | Linux 8 | [💿](https://repo.almalinux.org/almalinux/8/cloud/x86_64/images/AlmaLinux-8-GenericCloud-latest.x86_64.qcow2) | [🔑](https://repo.almalinux.org/almalinux/8/cloud/x86_64/images/CHECKSUM) 
 | Alama | Linux 9 | [💿](https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2) | [🔑](https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/CHECKSUM) 
 | Kali | 2022.4 | [💿](https://kali.download/cloud-images/current/kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz) | [🔑](https://kali.download/cloud-images/current/SHA256SUMS)
-| Fedora | 37 | [💿](https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 ) | [🔑](https://ftp.riken.jp/Linux/fedora/releases/37/Cloud/x86_64/images/Fedora-Cloud-37-1.7-x86_64-CHECKSUM)
-
+| Fedora | 38 | [💿](https://ftp.riken.jp/Linux/fedora/releases/38/Cloud/x86_64/images/Fedora-Cloud-Base-38-1.6.x86_64.qcow2 ) | [🔑](https://ftp.riken.jp/Linux/fedora/releases/38/Cloud/x86_64/images/Fedora-Cloud-38-1.6-x86_64-CHECKSUM)
 
 <br>
 
-Or just download them all in one shot:
+Or download most of them in one shot with the following bash script. 
 
 ```bash
-cd /tmp
+#!/bin/bash
 
-echo "Downloading Debian 11 Backports..."
-wget https://cloud.debian.org/images/cloud/bullseye-backports/latest/debian-11-backports-generic-amd64.qcow2
+# Set variables
+TMP_DIR="/tmp"
 
-echo "Downloading Debian 11..."
-wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2
+# Define arrays for image names, URLs, checksum URLs, and expected checksum algorithms
+images=(
+  "Debian 12"
+  "Debian 11" 
+  "Ubuntu Focal" 
+  "Ubuntu Bionic"  
+  "Kali Linux"
+)
 
-echo "Downloading Debian 10.."
-wget https://cloud.debian.org/images/cloud/buster/latest/debian-10-genericcloud-amd64.qcow2`
+urls=(
+    "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2"
+    "https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2"
+    "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"
+    "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
+    "http://kali.download/cloud-images/current/kali-linux-2023.2-cloud-genericcloud-amd64.tar.xz"
+)
 
-echo "Downloading Ubuntu Focal..."
-wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
+checksum_urls=(
+    "https://cloud.debian.org/images/cloud/bookworm/latest/SHA512SUMS"
+    "https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS"
+    "https://cloud-images.ubuntu.com/focal/current/SHA256SUMS"
+    "https://cloud-images.ubuntu.com/bionic/current/SHA256SUMS"
+    "https://kali.download/cloud-images/current/SHA256SUMS"
+)
 
-echo "Downloading Ubuntu Bionic..."
-wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
+checksum_algorithms=(
+    "sha512"
+    "sha512"
+    "sha256"
+    "sha256"
+    "sha256"
+)
 
-echo "Downloading Rocky 9..."
-wget https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2
-.
-echo "Downloading Rocky 8..."
-wget https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base.latest.x86_64.qcow2
+# Navigate to the temporary directory
+cd "$TMP_DIR"
 
-echo "Downloading Kali Linux..."
-wget https://kali.download/cloud-images/current/kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
-tar -xvf kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
-rm kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
-
-
+# Iterate through the arrays
+for i in "${!images[@]}"; do
+    echo "🔹 Now Downloading ⏬ ${images[$i]}..."
+    
+    # Download the image
+    wget "${urls[$i]}"
+    
+    # Calculate and compare checksums if a checksum URL is provided
+    if [ ! -z "${checksum_urls[$i]}" ]; then
+        image_file=$(basename "${urls[$i]}")
+        checksum_url="${checksum_urls[$i]}"
+        expected_algorithm="${checksum_algorithms[$i]}"
+        
+        actual_sum=$(openssl dgst -"$expected_algorithm" "$image_file" | awk '{ print $2 }')
+        expected_sum=$(curl -s "$checksum_url" | grep "$image_file" | awk '{ print $1 }')
+        
+        if [ "$actual_sum" = "$expected_sum" ]; then
+            echo "🔹 Checksums match for $image_file. ✅"
+            echo ""
+        else
+            echo "🔹 Checksums do not match ❌. The file $image_file might have been corrupted."
+        fi
+    fi
+done
 ```
-
-
-
-
-## Confirm the checksum status
-
-- To confirm the checksum of an image with Debian below is an example. 
-  ```shell
-  echo $(curl https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS | grep debian-11-genericcloud-amd64.qcow2 |  awk '{ print $1 }' ) debian-11-genericcloud-amd64.qcow2 | sha512sum --check
-  ```
 
 # Creating your first VM template with a cloud image. 
 
-- Setup the initial variables. 
+
+- [Optional] Install apt packages into the images, I like to have the qemu-guest-agent installed by default. 
+   ```shell
+   # If you haven't already you will need to install libguestfs-tools for adding packages to a disk image. 
+   sudo apt install --no-install-recommends --no-install-suggests libguestfs-tools -y
+   
+   # Then add the required packages before importing the image. 
+   sudo virt-customize -a $CLOUD_IMAGE --install qemu-guest-agent,lnav,ca-certificates,apt-transport-https,net-tools,dnsutils
+   ```
+
+
+> Its generally not good practice to install packages on your hypervisors unless absolutely necessary. Downloads, checksum checking, and installing extra packages can be done on a seperate PC and the final disk image uplaoded to the hypervisor using SCP. 
+{: .prompt-warning }
+
+- On proxmox start by settings variables to make the steps more generic and repeatable.  
   ```shell
   VM_TEMPLATE_ID=9001
   VM_PASSWORD=supercrect  # < Clear text input
@@ -99,7 +139,6 @@ rm kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
     --agent 1,fstrim_cloned_disks=1 \
     --tablet 0 \
     --ostype l26
-
   ```
 - Import the downloaded disk image into the new VM template. 
   ```shell
@@ -107,7 +146,7 @@ rm kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
       $CLOUD_IMAGE \
       $STORAGE
   ```
-- Add the virtual disk controller and attached the imported disk to the template. 
+- Add the virtual disk controller and attache the imported disk to the template. 
   ```shell
   qm set $VM_TEMPLATE_ID \
     --scsihw virtio-scsi-pci \
@@ -116,7 +155,7 @@ rm kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
     --bootdisk scsi0
   ```
 
-- Configure the default values for your cloud-init template. This can also be done on the Promxox UI:
+- Configure the default values for your cloud-init template. (This can also be done on the Promxox UI)
   ```shell
   qm set $VM_TEMPLATE_ID \
     --nameserver="10.7.7.3 10.7.7.2" \
@@ -126,7 +165,7 @@ rm kali-linux-2022.4-cloud-genericcloud-amd64.tar.xz
     --cipassword=$VM_PASSWORD
   ```
 
-- Lastly, convert the VM into a template with the following command:<br>
+- Lastly, convert the VM into a template with the following command.
   ```shell
   qm template $VM_TEMPLATE_ID
   ```

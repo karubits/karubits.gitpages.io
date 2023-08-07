@@ -44,9 +44,44 @@ Put the PC to sleep/suspend and wake it backup and rerun the command.
 3. Ensure the SATA Drive supports security erase enchanced mode and the disk is "not frozen". If the disk says frozen then put the PC to sleep and wake it up again. \
 `sudo hdparm -I /dev/sdX`
 4. Secure erase the disk
-```shell
-sudo hdparm --user-master u --security-erase-enhanced password /dev/sdX
-# If enchanced security erase is not supported:
-sudo hdparm --user-master u --security-set-pass password /dev/sdX
-```
+   ```shell
+   sudo hdparm --user-master u --security-erase-enhanced password /dev/sdX
+   # If enchanced security erase is not supported:
+   sudo hdparm --user-master u --security-set-pass password /dev/sdX
+   ```
 
+## 2. Partitioning and mounting a new drive (ext4)
+
+1. Locate the new drive you want to format. `lsblk --fs`, in this example the new drive is /dev/sdb.
+2. Create a partition label (usually mbr or gpt)
+   ```bash
+   sudo parted /dev/sda mklabel msdos
+   ```
+3. Partition 100% of the drive as ext4
+   ```bash
+   sudo parted -a opt /dev/sdb mkpart primary ext4 0% 100%
+   ```
+4. Label the parition (in this case "data" is the label) 
+   ```bash
+   mkfs.ext4 -L data /dev/sdb1
+   ```
+5. Create a directory to mount to. `mkdir /data`
+6. Add an entry in the /etc/fstab to the new partition is mounted on every reboot. 
+   ```
+   # /etc/fstab
+   LABEL=data /data ext4 rw,discard,errors=remount-ro,x-systemd.growfs 0 1
+   ```
+7. reread the fstab to mount the new mount. 
+   ```
+   sudo systemctl daemon-reload
+   sudo mount -a
+   ```
+8. Confirm the partition is mounted. 
+   ```shell
+   root@server02:/etc/network# lsblk --fs
+   NAME    FSTYPE  FSVER LABEL  UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+   sdb                                                                              
+   └─sdb1  ext4    1.0   data   a55217b4-f3eb-44fc-98a1-04d65158a203  466.1G     0% /data
+   ```
+
+   
