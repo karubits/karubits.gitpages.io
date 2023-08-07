@@ -123,14 +123,19 @@ Assumption is a http server is available to serve the firmware images.
 - Plug the USB device into the EX switch.
 - Power on the EX switch.
 - When you see the `Hit [Enter] to boot immediately, or space bar for command prompt` message prompt appear, press the Space bar to get the loader prompt.
+
+
 > To avoid missing it, you may start pressing the Space bar some seconds before the message prompt appears.
 {: .prompt-tip }
+
 - Issue the `install` command with the `format` option:
 ```bash
 loader> install --format file:///<Junos package name>
 # For example:
 loader> install --format file:///jinstall-ex-4200-15.1R7-S6.3-domestic-signed.tg
 ```
+
+
 > Note the above does require 3x forward slashes after file:, `///`
 {: .prompt-tip }
 
