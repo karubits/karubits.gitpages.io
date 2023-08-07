@@ -3,9 +3,9 @@ layout: post
 title: "Proxmox cloud-init templates"
 date: 2022-12-27 10:00:00 +0900
 categories: [proxmox]
-tags: [template, cloud-init, vm, linux]
+tags: [template, cloud-init, vm, linux, proxmox]
 ---
-# Introduction and why
+## Introduction and why
 
 Using cloud images provided by the major distribution creators over traditional installation media offers several advantages in the context of cloud computing and virtualization environments. Here are some of the key benefits:
 
@@ -21,13 +21,13 @@ Using cloud images provided by the major distribution creators over traditional 
 - Resource Efficiency: Cloud images are optimized to run efficiently in virtualized environments, making better use of resources like CPU, memory, and storage.
 
 
-## clout-init
+### clout-init
 
 cloud-init is a versatile package used in cloud computing environments to streamline the setup and configuration of virtual machine instances. It gathers instance-specific information from metadata services and user-provided data during instance launch. Using a modular architecture and YAML-based configuration, cloud-init automates tasks such as network setup, user account creation, and software installation. It allows users to define custom actions and settings through user data, ensuring efficient, consistent, and customizable initialization of instances while promoting compatibility across different Linux distributions and cloud platforms.
 
 With Proxmox cloud-init is used to automatically setup IP addressing, name servers, ssh keys, and the initial password. 
 
-# Download cloud templates of your preferred distributions
+## Download links to cloud templates
 
 Listed below are the official download links for some of the more common cloud images. 
 
@@ -48,6 +48,7 @@ Listed below are the official download links for some of the more common cloud i
 
 <br>
 
+### Bash script to automate downloads and checksum checking
 Or download most of them in one shot with the following bash script. 
 
 ```bash
@@ -118,7 +119,7 @@ for i in "${!images[@]}"; do
 done
 ```
 
-# Creating your first VM template with a cloud image. 
+## Creating your first VM template with a cloud image. 
 
 
 - [Optional] Install apt packages into the images, I like to have the qemu-guest-agent installed by default. 
@@ -188,7 +189,7 @@ done
   qm template $VM_TEMPLATE_ID
   ```
 
-# Create a new VM from the template for testing
+## Create a new VM from the template for testing
 
 - Before cloning the VM I use a variable to find the next available VM ID as the clone command requires you to set an ID. Then take a full a clone of the new template. 
   ```shell
@@ -206,7 +207,7 @@ done
 - Your new VM from your template should now be starting. with all your new setting set
 
 
-# References
+## References
 1. *[Proxmox Wiki - Cloud-Init Support](https://pve.proxmox.com/wiki/Cloud-Init_Support)*
 2. *[Proxmox VE - How to build an Ubuntu 22.04 Template (Updated Method) - Video](https://www.youtube.com/watch?v=MJgIm03Jxdo)*
 3. *[Proxmox VE – How to build an Ubuntu 22.04 Template (Updated Method) - Blog](https://www.learnlinux.tv/proxmox-ve-how-to-build-an-ubuntu-22-04-template-updated-method/)*
