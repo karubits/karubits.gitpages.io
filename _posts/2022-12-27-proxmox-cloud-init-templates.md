@@ -5,6 +5,8 @@ date: 2022-12-27 10:00:00 +0900
 categories: [proxmox]
 tags: [template, cloud-init, vm, linux, proxmox]
 ---
+Automate virtual machine provisioning with cloud templates and cloud init with proxmox. 
+
 ## Introduction and why
 
 Using cloud images provided by the major distribution creators over traditional installation media offers several advantages in the context of cloud computing and virtualization environments. Here are some of the key benefits:
