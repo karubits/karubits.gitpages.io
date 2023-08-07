@@ -128,6 +128,7 @@ Assumption is a http server is available to serve the firmware images.
 > To avoid missing it, you may start pressing the Space bar some seconds before the message prompt appears.
 {: .prompt-tip }
 
+
 - Issue the `install` command with the `format` option:
 ```bash
 loader> install --format file:///<Junos package name>
