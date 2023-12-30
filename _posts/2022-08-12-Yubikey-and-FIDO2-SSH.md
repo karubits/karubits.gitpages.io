@@ -30,7 +30,7 @@ ykman fido access change-pin
 
 ## Key Types
 
-With SSH and FIDO you will have two primary options for generating a ssh key. </br>
+With SSH and FIDO you will have two primary options for generating a ssh key.
 
 1. **Resident Key** (Discoverable) - Allows for portability. Requires OpenSSH 8.3 or above. 
 2. **Non-resident Key** (Non-Discoverable) - Requires a credential id file that is automatically generated in the `~/.ssh`.Requires OpenSSH 8.2p1 or above. Recommended for high security environments.
@@ -101,8 +101,11 @@ alias yubikey_ssh='eval "$(ssh-agent -s)" && ssh-add -K && ssh-add -L'
 > When connecting you will have a GUI prompt to enter your PIN number. After entering your PIN the command prompt will look like its handing, simply touch the Yubikey to complete the connection. 
 {: .prompt-info }
 
-If you would like to delete the ssk key from your Yubikey you can use the following command: </br>
-`ykman fido credentials delete ssh`
+If you would like to delete the ssk key from your Yubikey you can use the following command:
+   ```bash
+   ykman fido credentials delete ssh   
+   ```
+
 
 ## References
 
