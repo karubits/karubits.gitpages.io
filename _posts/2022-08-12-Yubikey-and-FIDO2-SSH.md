@@ -17,7 +17,8 @@ ykman fido info
 # Set the PIN:
 ykman fido access change-pin
 ````
-Warning: Resetting the PIN will remove all FIDO2 credentials. 
+> Resetting the PIN will remove all FIDO2 credentials. 
+{: .prompt-danger }
 
 
 ```
