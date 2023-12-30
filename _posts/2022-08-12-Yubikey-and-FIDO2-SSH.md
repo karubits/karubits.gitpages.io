@@ -7,10 +7,14 @@ tags: [yubikey, linux, ssh, fido]
 ---
 
 
+## Initial Setup
 
+To start using FIDO on you Yubikey you will need to set a PIN first. This can be done from the command line using the Yubikey manager application. 
 
-To set a FIDO2 pin on a new device:
-````
+```bash
+# If you don't have ykman in
+sudo apt install yubikey-manager -y
+
 # Check if a PIN has been set:
 ykman fido info
 
@@ -20,24 +24,20 @@ ykman fido access change-pin
 > Resetting the PIN will remove all FIDO2 credentials. 
 {: .prompt-danger }
 
-
-```
-# Example
-ssh-keygen -t ed25519-sk -O resident \
-    -O application=ssh:your-text-here \
-    -C "$(date +'%d-%m-%Y')-physical_yubikey_number"
+> The FIDO2 security key will be locked if the PIN is incorrect 8 times in a row. In that case, you will need to reset the security key. After resetting, you will lose all the authentication information you have registered so far.
+{: .prompt-danger }
 
 
-# Actual Example
-ssh-keygen -t ed25519-sk -O resident \
-    -O application=ssh:emergency-ssh-access-desktop-server \
-    -C "Emergency Key 1 - 10532500" 
+## Key Types
 
-# Actual example with PIN prompting
-ssh-keygen -t ed25519-sk -O resident -O verify-required \
-    -O application=ssh:emergency-ssh-access-desktop-server \
-    -C "Emergency Key 2 - 10653212"
-````
+With SSH and FIDO you will have two primary options for generating a ssh key. </br>
+
+1. **Resident Key** (Discoverable) - Allows for portability. Requires OpenSSH 8.3 or above. 
+2. **Non-resident Key** (Non-Discoverable) - Requires a credential id file that is automatically generated in the `~/.ssh`.Requires OpenSSH 8.2p1 or above. Recommended for high security environments.
+
+### Generating a Resident Key (Discoverable)
+
+Before generating your ssh key its important to understand the various options you have for resident keys. 
 
 | Factors | Command |Description | 
 | :--- | :--- | :--- | 
@@ -47,9 +47,37 @@ ssh-keygen -t ed25519-sk -O resident -O verify-required \
 | A PIN and a touch are required (**most secure**) | `ssh-keygen -t ed25519-sk -O resident -O verify-required` | This is the most secure option, it requires both the PIN and touching to be used |
 
 
+To create a new SSH key on your Yubikey, here are some examples below:
+
+```bash
+# Example
+ssh-keygen -t ed25519-sk -O resident \
+    -O application=ssh:your-text-here \
+    -C "comment or identifier"
+
+
+# Actual Example
+ssh-keygen -t ed25519-sk -O resident \
+    -O application=ssh:ssh_key_for_server_access \
+    -C "Emergency Key 1 - 10532500" 
+
+# Actual example with PIN prompting
+ssh-keygen -t ed25519-sk -O resident -O verify-required \
+    -O application=ssh:ssh_key_for_server_access \
+    -C "Emergency Key 2 - 10653212"
+
+# Verify the key
+❯ ykman fido credentials list
+Enter your PIN: 
+ssh:ssh_for_servers_20231230 0000000000000000000000000000000000000000000000000000000000000000 openssh
+````
+
 When using PIN you will need to ensure ssh-askpass is installed and the ssh-agent is loaded and the key is loaded using the -K paramter with the ssh-add option. 
 
 ```bash
+# Install ssh-askpass
+sudo apt install ssh-askpass -y
+
 # Sometimes it is required to set the SSH_ASKPASS env variable for the binary location 
 SSH_ASKPASS=$(which ssh-askpass)
 
@@ -70,19 +98,13 @@ export SSH_ASKPASS=/usr/bin/ssh-askpass
 alias yubikey_ssh='eval "$(ssh-agent -s)" && ssh-add -K && ssh-add -L'
 ```
 
-> When connecting you will have a GUI prompt to enter your PIN number. After entering your PIN the command prompt looks like its handing, simply touch the Yubikey to complete the connection. 
+> When connecting you will have a GUI prompt to enter your PIN number. After entering your PIN the command prompt will look like its handing, simply touch the Yubikey to complete the connection. 
 {: .prompt-info }
 
+If you would like to delete the ssk key from your Yubikey you can use the following command: </br>
+`ykman fido credentials delete ssh`
 
+## References
 
-ref. 
 - [Securing SSH with FIDO2](https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html)
 - [GitHub now supports SSH security keys](https://www.yubico.com/blog/github-now-supports-ssh-security-keys/)
-
-
-Using a Discoveral (resident) key has several benefits:
-
-1. Portability: Since the private key is stored on the YubiKey, you can use it on multiple devices without having to copy or transfer the key between them. Just plug in the YubiKey, and you can use the resident key for authentication.
-2. Enhanced security: Resident keys are protected by the hardware security of the YubiKey. This makes it more difficult for an attacker to access or compromise the private key compared to when it is stored on a computer's filesystem.
-
-However for the best security a non-discoverable credential is preferred. If the key was found they would not be able to use it for ssh access.
