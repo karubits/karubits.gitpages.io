@@ -12,7 +12,7 @@ tags: [server. dell, intel, proxmox, firmware]
 
 ## Intel Datacenter SSD Firmware
 
-> At the time of writting, Intel's NAND SSD business has been acquired by Solidigm. The tooling which was previously called Intel MAS is no longed supported. 
+> At the time of writting, Intel's NAND SSD business has been acquired by Solidigm. The tooling which was previously called Intel MAS. If you have Intel Optane drives, please continue to use Intel MAS. Both tools can be install in parallel. 
 {: .prompt-tip }
 
 This example will cover upgrading the firwmare of Intel DC series firmware on a Debian operating system. This same steps are applicable to Proxmox hypervisors as well. 
@@ -23,19 +23,20 @@ This example will cover upgrade the Intel DC P4510 and the same steps will cover
 
 - Download the latest SST package from Solidigm
 [here](https://www.solidigm.com/us/en/support-page/drivers-downloads/ka-00085.html)
-
+- Intel's MAS Firmware tool for Optane drives can be found [here](https://www.intel.com/content/www/us/en/download/19520/intel-memory-and-storage-tool-cli-command-line-interface.html?v=t)
 - For advanced usuage of the SST tool you can refer to the CLI User Guide [here](https://sdmsdfwdriver.blob.core.windows.net/files/kba-gcc/drivers-downloads/ka-00085--sst/sst--1-4/sst-cli-user-guide-public-727329-005us.pdf). 
-- At the time of writing v1.4 was the latest. 
+- At the time of writing v1.11 was the latest for the SST tool from Solidigm.
 
 ### Procedure
 
-- Download the SST tool directly on the server (v1.4 link below). <br>
-    `wget https://sdmsdfwdriver.blob.core.windows.net/files/kba-gcc/drivers-downloads/ka-00085--sst/sst--1-4/sst-cli-linux-deb--1-4.zip`
-- Exact the package <br>
-    `unzip sst-cli-linux-deb--1-4.zip`
-- Install the SST CLI tool (Debian x64) <br>
-    `dpkg -i sst_1.4.221-0_amd64.deb`
-- View available SSDs and confirm which ones can be upgraded. <br>
+1. Go to Solidigm website to download the latest Solidigm Storage Tool (SST) at the link [here](https://www.solidigmtechnology.jp/support-page/drivers-downloads/ka-00085.html). <br>
+Alternatively you can download the SST tool directly from the link below (v1.11 as of December 2023). <br>
+    `wget https://sdmsdfwdriver.blob.core.windows.net/files/kba-gcc/drivers-downloads/ka-00085/sst--1-11/sst-cli-linux-deb--1-11.zip`
+2. Exact the package <br>
+    `unzip sst-cli-linux-deb--1-11.zip`
+3. Install the SST CLI tool (Debian x64) <br>
+    `dpkg -i sst_1.11.268-0_amd64.deb`
+4. View available SSDs and confirm which ones can be upgraded. <br>
     ```bash
     sst show -ssd
 
@@ -57,8 +58,8 @@ This example will cover upgrade the Intel DC P4510 and the same steps will cover
     SectorDataSize : 512
     SerialNumber : PHLJ0373032N2P0BGN
     ```
-- Note the Index number if you can see a new update listed in the 'FirmwareUpdateAvailable' field. 
-- Trigger the upgrade <br>
+5. Note the Index number if you can see a new update listed in the 'FirmwareUpdateAvailable' field. 
+6. Trigger the upgrade <br>
     ```bash
     sst load -force -ssd 0
 
@@ -68,5 +69,10 @@ This example will cover upgrade the Intel DC P4510 and the same steps will cover
 
     Status : Firmware updated successfully. Please  reboot the system.
     ```
-- Then reboot the system for the new firmware to take effect. 
+7. Reboot the system for the new firmware to take effect. 
+
+
+> If your SSDs are behind a Megaraid controller (inclduing Dell PERC) you won't be able to see the SSDs without enabling the following command. <br>
+`sst set –system EnableLSIAdapter=False`
+{: .prompt-tip }
 
