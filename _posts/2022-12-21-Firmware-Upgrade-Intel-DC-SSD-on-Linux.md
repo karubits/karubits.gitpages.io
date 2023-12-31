@@ -71,6 +71,6 @@ Alternatively you can download the SST tool directly from the link below (v1.11 
 
 
 > If your SSDs are behind a Megaraid controller (including Dell PERC) you won't be able to see the SSDs without enabling the following command. <br>
-`sst set –system EnableLSIAdapter=False`
+`sst set –system EnableLSIAdapter=True`
 {: .prompt-tip }
 
