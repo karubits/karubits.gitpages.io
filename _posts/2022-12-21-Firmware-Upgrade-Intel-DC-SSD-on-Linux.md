@@ -7,17 +7,15 @@ tags: [server. dell, intel, proxmox, firmware]
 ---
 
 
-# Server Preperation / Hardware Notes
+# Server Preparation / Hardware Notes
 
 
 ## Intel Datacenter SSD Firmware
 
-> At the time of writting, Intel's NAND SSD business has been acquired by Solidigm. The tooling which was previously called Intel MAS. If you have Intel Optane drives, please continue to use Intel MAS. Both tools can be install in parallel. 
+> At the time of writing, Intel's NAND SSD business has been acquired by Solidigm. The tooling which was previously called Intel MAS. If you have Intel Optane drives, please continue to use Intel MAS. Both tools can be install in parallel. 
 {: .prompt-tip }
 
-This example will cover upgrading the firwmare of Intel DC series firmware on a Debian operating system. This same steps are applicable to Proxmox hypervisors as well. 
-
-This example will cover upgrade the Intel DC P4510 and the same steps will cover other Intel DC series firmware as well.
+This guide covers upgrading the firmware on Intel DC series SSDs on a Debian based operating system. This same steps are applicable to Proxmox hypervisors as well, although when CEPHs is running and the target disk is used as an OSD I found the drive to be locked and I have not found a way to upgrade the firmware without using an external system. 
 
 ### Links, Guides, and Downloads
 
@@ -72,7 +70,7 @@ Alternatively you can download the SST tool directly from the link below (v1.11 
 7. Reboot the system for the new firmware to take effect. 
 
 
-> If your SSDs are behind a Megaraid controller (inclduing Dell PERC) you won't be able to see the SSDs without enabling the following command. <br>
+> If your SSDs are behind a Megaraid controller (including Dell PERC) you won't be able to see the SSDs without enabling the following command. <br>
 `sst set –system EnableLSIAdapter=False`
 {: .prompt-tip }
 
