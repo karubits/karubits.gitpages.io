@@ -36,7 +36,6 @@ Listed below are the official download links for some of the more common cloud i
 ## Creating your first VM template with a cloud image. 
 
 > Its generally not good practice to install packages on your hypervisor. Downloads, checksum checking, and installing extra packages can be done on a separate PC and the final disk image can then be transferred to the hypervisor using SCP. 
-
 {: .prompt-warning }
 
 - Download one of the distributions cloud images. Example below:
