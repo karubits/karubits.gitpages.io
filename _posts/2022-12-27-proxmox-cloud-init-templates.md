@@ -7,27 +7,10 @@ tags: [template, cloud-init, vm, linux, proxmox]
 ---
 Automate virtual machine provisioning with cloud templates and cloud init with proxmox. 
 
-## Introduction and why
+## Introduction
 
-Using cloud images provided by the major distribution creators over traditional installation media offers several advantages in the context of cloud computing and virtualization environments. Here are some of the key benefits:
+Cloud images are optimized images of a Linux distribution that are design to run in cloud environments. There are generally updates faster then the ISO images, and are slimmed down with some built in support for automated provisioning using cloud init. 
 
-- Optimized for Cloud Environments: Cloud images are specifically designed and optimized for running in virtualized or cloud environments. They come with preconfigured settings, drivers, and components tailored to these environments, ensuring smooth performance and compatibility.
-- Smaller Footprint: Cloud images are usually stripped down to include only essential packages, reducing the overall size of the image. This is important for faster deployment, as well as reducing storage costs in cloud environments.
-- Faster Deployment: Cloud images are ready to use out of the box, so you can quickly deploy instances without the need for a full installation process. This reduces setup time and makes it easier to scale your infrastructure.
-- Automated Configuration: Cloud images often include tools and scripts for automated configuration and deployment. This can streamline the process of setting up networking, security settings, and other parameters.
-- Regular Updates: Cloud images are regularly updated to include the latest security patches and software updates. This helps ensure that your instances are running the most up-to-date and secure software.
-- Integration with Cloud Services: Cloud images often come with cloud-init, a tool that enables you to customize and configure instances during the first boot. This allows for seamless integration with cloud platforms' services and APIs.
-- Image Reusability: Once you've configured and customized a cloud image, you can save it as a custom image or snapshot. This allows you to create new instances from the customized image, saving you time and ensuring consistency across deployments.
-- Version Consistency: Using cloud images helps maintain consistency across different instances. This is especially important when managing a large number of virtual machines, as manual installations might introduce inconsistencies.
-- Rapid Scaling: Cloud images make it easier to scale your infrastructure up or down based on demand. You can quickly launch new instances without going through a time-consuming installation process.
-- Resource Efficiency: Cloud images are optimized to run efficiently in virtualized environments, making better use of resources like CPU, memory, and storage.
-
-
-### clout-init
-
-cloud-init is a versatile package used in cloud computing environments to streamline the setup and configuration of virtual machine instances. It gathers instance-specific information from metadata services and user-provided data during instance launch. Using a modular architecture and YAML-based configuration, cloud-init automates tasks such as network setup, user account creation, and software installation. It allows users to define custom actions and settings through user data, ensuring efficient, consistent, and customizable initialization of instances while promoting compatibility across different Linux distributions and cloud platforms.
-
-With Proxmox cloud-init is used to automatically setup IP addressing, name servers, ssh keys, and the initial password. 
 
 ## Download links to cloud templates
 
@@ -50,103 +33,43 @@ Listed below are the official download links for some of the more common cloud i
 
 <br>
 
-### Bash script to automate downloads and checksum checking
-Or download most of them in one shot with the following bash script. 
-
-```bash
-#!/bin/bash
-
-# Set variables
-TMP_DIR="/tmp"
-
-# Define arrays for image names, URLs, checksum URLs, and expected checksum algorithms
-images=(
-  "Debian 12"
-  "Debian 11" 
-  "Ubuntu Focal" 
-  "Ubuntu Bionic"  
-  "Kali Linux"
-)
-
-urls=(
-    "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2"
-    "https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2"
-    "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"
-    "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
-    "http://kali.download/cloud-images/current/kali-linux-2023.2-cloud-genericcloud-amd64.tar.xz"
-)
-
-checksum_urls=(
-    "https://cloud.debian.org/images/cloud/bookworm/latest/SHA512SUMS"
-    "https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS"
-    "https://cloud-images.ubuntu.com/focal/current/SHA256SUMS"
-    "https://cloud-images.ubuntu.com/bionic/current/SHA256SUMS"
-    "https://kali.download/cloud-images/current/SHA256SUMS"
-)
-
-checksum_algorithms=(
-    "sha512"
-    "sha512"
-    "sha256"
-    "sha256"
-    "sha256"
-)
-
-# Navigate to the temporary directory
-cd "$TMP_DIR"
-
-# Iterate through the arrays
-for i in "${!images[@]}"; do
-    echo "🔹 Now Downloading ⏬ ${images[$i]}..."
-    
-    # Download the image
-    wget "${urls[$i]}"
-    
-    # Calculate and compare checksums if a checksum URL is provided
-    if [ ! -z "${checksum_urls[$i]}" ]; then
-        image_file=$(basename "${urls[$i]}")
-        checksum_url="${checksum_urls[$i]}"
-        expected_algorithm="${checksum_algorithms[$i]}"
-        
-        actual_sum=$(openssl dgst -"$expected_algorithm" "$image_file" | awk '{ print $2 }')
-        expected_sum=$(curl -s "$checksum_url" | grep "$image_file" | awk '{ print $1 }')
-        
-        if [ "$actual_sum" = "$expected_sum" ]; then
-            echo "🔹 Checksums match for $image_file. ✅"
-            echo ""
-        else
-            echo "🔹 Checksums do not match ❌. The file $image_file might have been corrupted."
-        fi
-    fi
-done
-```
-
 ## Creating your first VM template with a cloud image. 
 
+> Its generally not good practice to install packages on your hypervisor. Downloads, checksum checking, and installing extra packages can be done on a separate PC and the final disk image can then be transferred to the hypervisor using SCP. 
 
-- [Optional] Install apt packages into the images, I like to have the qemu-guest-agent installed by default. 
-   ```shell
-   # If you haven't already you will need to install libguestfs-tools for adding packages to a disk image. 
-   sudo apt install --no-install-recommends --no-install-suggests libguestfs-tools -y
-   
-   # Then add the required packages before importing the image. 
-   sudo virt-customize -a $CLOUD_IMAGE --install qemu-guest-agent,lnav,ca-certificates,apt-transport-https,net-tools,dnsutils
-   ```
-
-
-> Its generally not good practice to install packages on your hypervisors unless absolutely necessary. Downloads, checksum checking, and installing extra packages can be done on a separate PC and the final disk image can then be transferred to the hypervisor using SCP. 
 {: .prompt-warning }
 
-- On proxmox start by settings variables to make the steps more generic and repeatable.  
+- Download one of the distributions cloud images. Example below:
+   ```shell
+   wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2
+   ```
+- [Optional] I prefer my images to have a few essential packages installed, especially the qemu-guest-agent that is used by Proxmox. To do so you will need `libguestfs-tools` installed. 
+   ```shell
+   sudo apt install --no-install-recommends --no-install-suggests libguestfs-tools -y
+   ```
+- Then use `virt-cutomize` to install your preferred packages. 
+   ```shell
+   # Then add the required packages before importing the image. 
+   CLOUD_IMAGE=debian-12-generic-amd64.qcow2
+
+   sudo virt-customize -a $CLOUD_IMAGE --install qemu-guest-agent,lnav,ca-certificates,apt-transport-https,net-tools,dnsutils
+   ```
+- If you have perform the above on a seperate PC then scp the modified disk image to the target hypervisor. 
+- On proxmox start by setting variables to make the steps more generic and repeatable.  
   ```shell
-  VM_TEMPLATE_ID=9001
-  VM_PASSWORD=supercrect  # < Clear text input
-  VM_USER=karubits
-  TEMPLATE_NAME=debian-cloud-template
   CLOUD_IMAGE=focal-server-cloudimg-amd64.img
+  DNS1=1.1.1.1
+  DNS2=8.8.8.8
+  DNSSEARCH=karubits.com
   STORAGE=nvme-2tb
+  TEMPLATE_NAME=debian-12-cloud-template
+  VM_TEMPLATE_ID=9001
+  VM_USER=karubits
+  
+  # Using read prevents the password from been saved in bash history
+  read -rs -p "Enter password: " VM_PASSWORD
   ```
-- Create the initial template with the minimum values. 
+- Create the initial template with the minimum values. You can adjust these to suit your environment.  
   ```shell
   qm create $VM_TEMPLATE_ID \
     --name $TEMPLATE_NAME \
@@ -179,8 +102,8 @@ done
 - Configure the default values for your cloud-init template. (This can also be done on the Promxox UI)
   ```shell
   qm set $VM_TEMPLATE_ID \
-    --nameserver="10.7.7.3 10.7.7.2" \
-    --searchdomain=core.io \
+    --nameserver="$DNS1 $DNS2" \
+    --searchdomain=$DNSSEARCH \
     --ipconfig0=ip=dhcp \
     --ciuser=$VM_USER \
     --cipassword=$VM_PASSWORD
@@ -201,12 +124,12 @@ done
     --full=true \
     --name=wow-so-quick-to-deploy
   ```
-- As the default image size is very small (247mb for Debian), expand the disk to make the VM useful and then start the VM:
+- As the default image size is very small (e.g. 247mb for Debian), expand the disk to make the VM useful and then start the VM:
   ```shell
   qm resize $NEXT_VM scsi0 +15G
   qm start $NEXT_VM
   ```
-- Your new VM from your template should now be starting. with all your new setting set
+
 
 
 ## References
