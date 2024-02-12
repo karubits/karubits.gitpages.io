@@ -20,18 +20,7 @@ set interfaces interface-range SERVER-A unit 0 family ethernet-switching native-
 ```
 Notice how the native vlan should not be a member of the vlans unlike EX4300s. 
 
-> EX3300 will accept the EX4300 commands and apply it to the configuration however it doesn't mean its supported. Use the show configuration command without display set to see if the command is actually supported. 
-   ```
-           unit 0 {
-            family ethernet-switching {
-                ##
-                ## Warning: statement ignored: unsupported platform (ex3300-48p)
-                ##
-                interface-mode access;
-                vlan {
-                    members V13_INBAND_MGMT;
-
-   ```
+> EX3300 will accept the EX4300 commands and apply it to the configuration however it doesn't mean its supported. Use the show configuration command without display set to see if the command is actually supported. You will usually see something along the lines of "## Warning: statement ignored: unsupported platform"
 {: .prompt-tip }
 
 # Juniper ELS Examples (based on EX4300)
