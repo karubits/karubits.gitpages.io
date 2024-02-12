@@ -6,6 +6,33 @@ categories: [network, junos]
 tags: [network, junos, switches]
 ---
 
+# Juniper EX3300
+
+## Native VLANs on EX3300
+
+Unlike ELS with the EX4300 the configuration is different for EX330. This has caught me off guard a few times. 
+
+```
+set interfaces interface-range SERVER-A member ge-0/0/6
+set interfaces interface-range SERVER-A unit 0 family ethernet-switching port-mode trunk
+set interfaces interface-range SERVER-A unit 0 family ethernet-switching vlan members V12_SHARED_SERVICES
+set interfaces interface-range SERVER-A unit 0 family ethernet-switching native-vlan-id 13
+```
+Notice how the native vlan should not be a member of the vlans unlike EX4300s. 
+
+> EX3300 will accept the EX4300 commands and apply it to the configuration however it doesn't mean its supported. Use the show configuration command without display set to see if the command is actually supported. 
+   ```
+           unit 0 {
+            family ethernet-switching {
+                ##
+                ## Warning: statement ignored: unsupported platform (ex3300-48p)
+                ##
+                interface-mode access;
+                vlan {
+                    members V13_INBAND_MGMT;
+
+   ```
+{: .prompt-tip }
 
 # Juniper ELS Examples (based on EX4300)
 
