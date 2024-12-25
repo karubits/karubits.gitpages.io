@@ -84,3 +84,10 @@ Want to by-pass paywalls (e.g. mandatory subscriptions before viewing news artic
 Just copy the URL and paste into either of these websites:
 - [smry.ai](https://www.smry.ai/)
 - [12ft.io](https://12ft.io/)
+
+
+#### Download Youtube Videos
+
+Want to download videos or music from Youtube? I recommend the following applications. 
+1. [Stacher](https://stacher.io/) 
+* If it doesn't work the first time go to "Something not working?" -> (Re-)install yt-dlp
