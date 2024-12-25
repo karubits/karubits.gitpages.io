@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Recommended Browser Addons"
-date: 2023-04-13 01:00:00 +0900
-categories: [network, wifi]
-tags: [brower, addons, internet]
+date: 2024-012-25 01:00:00 +0900
+categories: [browser]
+tags: [browser, addons, internet]
 ---
 
 A quick post, more for my parents on which browser addons I recommended and a few internet browser tips. 
