@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Recommended Browser Addons"
-date: 2024-012-25 01:00:00 +0900
+date: 2024-12-25 01:00:00 +0900
 categories: [browser]
 tags: [browser, addons, internet]
 ---
